@@ -9,22 +9,25 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
   <style>
     :root {
-      --bg:          #080D1A;
-      --surface:     #0F1729;
-      --surface-2:   #162038;
-      --border:      #1E2D4A;
-      --accent:      #00C8F0;
-      --accent-glow: rgba(0,200,240,0.12);
-      --copper:      #C4843A;
-      --text:        #E8EDF5;
-      --text-dim:    #7A90AB;
-      --text-dimmer: #4A5E74;
+      --bg:          #F3F9F5;
+      --surface:     #FFFFFF;
+      --surface-2:   #EAF4EE;
+      --border:      #C4DCCB;
+      --accent:      #0B7A40;
+      --accent-glow: rgba(11,122,64,0.08);
+      --accent-mid:  rgba(11,122,64,0.18);
+      --warm:        #6B4C1A;
+      --text:        #0C1E14;
+      --text-dim:    #3B6450;
+      --text-dimmer: #7BA08A;
       --font-display:'Space Grotesk', sans-serif;
       --font-body:   'Inter', sans-serif;
       --font-mono:   'IBM Plex Mono', monospace;
       --r:           8px;
       --r-lg:        14px;
       --t:           0.2s ease;
+      --shadow:      0 1px 4px rgba(0,0,0,0.07);
+      --shadow-hover:0 4px 16px rgba(11,122,64,0.13);
     }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
@@ -37,7 +40,7 @@
       -webkit-font-smoothing: antialiased;
     }
     a { color: var(--accent); text-decoration: none; transition: opacity var(--t); }
-    a:hover { opacity: 0.75; }
+    a:hover { opacity: 0.72; }
     .container { max-width: 1060px; margin: 0 auto; padding: 0 24px; }
     section { padding: 80px 0; }
 
@@ -46,12 +49,12 @@
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
       height: 58px; padding: 0 28px;
       display: flex; align-items: center; justify-content: space-between;
-      background: rgba(8,13,26,0.82);
+      background: rgba(243,249,245,0.88);
       backdrop-filter: blur(14px);
       border-bottom: 1px solid transparent;
       transition: border-color 0.3s ease;
     }
-    nav.scrolled { border-bottom-color: var(--border); }
+    nav.scrolled { border-bottom-color: var(--border); box-shadow: 0 1px 8px rgba(0,0,0,0.06); }
     .nav-logo { font-family: var(--font-mono); font-size: 13px; font-weight: 500; color: var(--accent); letter-spacing: 0.06em; }
     .nav-links { display: flex; gap: 30px; list-style: none; }
     .nav-links a { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.04em; color: var(--text-dim); transition: color var(--t); }
@@ -75,7 +78,7 @@
     #hero::before {
       content: '';
       position: absolute; inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' xmlns='http://www.w3.org/2000/svg'%3E%3Cg stroke='%2300C8F0' stroke-width='0.6' opacity='0.09' fill='none'%3E%3Cline x1='0' y1='25' x2='40' y2='25'/%3E%3Cline x1='60' y1='25' x2='100' y2='25'/%3E%3Cline x1='0' y1='75' x2='100' y2='75'/%3E%3Cline x1='25' y1='0' x2='25' y2='100'/%3E%3Cline x1='75' y1='0' x2='75' y2='60'/%3E%3Cline x1='75' y1='80' x2='75' y2='100'/%3E%3Ccircle cx='25' cy='25' r='2.5' fill='%2300C8F0' opacity='0.28'/%3E%3Ccircle cx='75' cy='75' r='2.5' fill='%2300C8F0' opacity='0.28'/%3E%3Ccircle cx='25' cy='75' r='1.5' fill='%2300C8F0' opacity='0.18'/%3E%3Ccircle cx='75' cy='25' r='1.5' fill='%2300C8F0' opacity='0.12'/%3E%3C/g%3E%3C/svg%3E");
+      background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' xmlns='http://www.w3.org/2000/svg'%3E%3Cg stroke='%230B7A40' stroke-width='0.7' opacity='0.08' fill='none'%3E%3Cline x1='0' y1='25' x2='40' y2='25'/%3E%3Cline x1='60' y1='25' x2='100' y2='25'/%3E%3Cline x1='0' y1='75' x2='100' y2='75'/%3E%3Cline x1='25' y1='0' x2='25' y2='100'/%3E%3Cline x1='75' y1='0' x2='75' y2='60'/%3E%3Cline x1='75' y1='80' x2='75' y2='100'/%3E%3Ccircle cx='25' cy='25' r='2.5' fill='%230B7A40' opacity='0.22'/%3E%3Ccircle cx='75' cy='75' r='2.5' fill='%230B7A40' opacity='0.22'/%3E%3Ccircle cx='25' cy='75' r='1.5' fill='%230B7A40' opacity='0.14'/%3E%3Ccircle cx='75' cy='25' r='1.5' fill='%230B7A40' opacity='0.10'/%3E%3C/g%3E%3C/svg%3E");
       pointer-events: none;
     }
     #hero::after {
@@ -104,7 +107,7 @@
       font-weight: 400; color: var(--text-dim);
       margin-bottom: 24px; line-height: 1.4;
     }
-    .hero-role span { color: var(--copper); font-weight: 500; }
+    .hero-role span { color: var(--accent); font-weight: 600; }
     .hero-bio {
       font-size: 14.5px; color: var(--text-dim);
       max-width: 540px; margin-bottom: 34px; line-height: 1.72;
@@ -113,6 +116,8 @@
       display: flex; margin-bottom: 38px;
       border: 1px solid var(--border); border-radius: var(--r);
       overflow: hidden; width: fit-content;
+      background: var(--surface);
+      box-shadow: var(--shadow);
     }
     .stat-item { padding: 12px 22px; border-right: 1px solid var(--border); text-align: center; }
     .stat-item:last-child { border-right: none; }
@@ -120,22 +125,23 @@
     .stat-label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-dimmer); }
     .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
     .btn-primary {
-      background: var(--accent); color: var(--bg);
+      background: var(--accent); color: #fff;
       font-family: var(--font-display); font-weight: 600; font-size: 14px;
       padding: 11px 24px; border-radius: var(--r);
       display: inline-flex; align-items: center; gap: 8px;
-      transition: opacity var(--t);
+      transition: opacity var(--t); box-shadow: 0 2px 8px rgba(11,122,64,0.25);
     }
     .btn-primary:hover { opacity: 0.86; }
     .btn-secondary {
-      background: transparent; color: var(--text);
+      background: var(--surface); color: var(--text);
       font-family: var(--font-display); font-weight: 500; font-size: 14px;
       padding: 11px 24px; border-radius: var(--r);
       border: 1px solid var(--border);
       display: inline-flex; align-items: center; gap: 8px;
       transition: border-color var(--t), background var(--t);
+      box-shadow: var(--shadow);
     }
-    .btn-secondary:hover { border-color: var(--accent); background: var(--accent-glow); color: var(--text); opacity: 1; }
+    .btn-secondary:hover { border-color: var(--accent); background: var(--surface-2); color: var(--text); opacity: 1; }
 
     /* ── SECTION LABELS ── */
     .section-label {
@@ -147,7 +153,6 @@
       font-family: var(--font-display); font-size: 27px; font-weight: 600;
       color: var(--text); margin-bottom: 36px;
     }
-    .section-divider { border-top: 1px solid var(--border); }
 
     /* ── SKILLS ── */
     #skills { border-top: 1px solid var(--border); }
@@ -155,9 +160,10 @@
     .skill-card {
       background: var(--surface); border: 1px solid var(--border);
       border-radius: var(--r-lg); padding: 20px 22px;
-      transition: border-color var(--t), background var(--t);
+      box-shadow: var(--shadow);
+      transition: border-color var(--t), box-shadow var(--t), background var(--t);
     }
-    .skill-card:hover { border-color: rgba(0,200,240,0.35); background: var(--surface-2); }
+    .skill-card:hover { border-color: var(--accent); box-shadow: var(--shadow-hover); background: var(--surface-2); }
     .skill-card-title {
       font-family: var(--font-mono); font-size: 10px;
       letter-spacing: 0.14em; text-transform: uppercase;
@@ -178,17 +184,18 @@
       background: var(--surface); border: 1px solid var(--border);
       border-radius: var(--r-lg); padding: 26px;
       display: flex; flex-direction: column;
-      transition: border-color var(--t), transform var(--t);
+      box-shadow: var(--shadow);
+      transition: border-color var(--t), box-shadow var(--t), transform var(--t);
     }
-    .project-card:hover { border-color: rgba(0,200,240,0.4); transform: translateY(-2px); }
+    .project-card:hover { border-color: var(--accent); box-shadow: var(--shadow-hover); transform: translateY(-2px); }
     .project-card.featured {
       grid-column: 1 / -1;
-      border-color: rgba(0,200,240,0.22);
+      border-left: 3px solid var(--accent);
     }
     .project-type {
       font-family: var(--font-mono); font-size: 10px;
       letter-spacing: 0.13em; text-transform: uppercase;
-      color: var(--copper); margin-bottom: 8px;
+      color: var(--warm); margin-bottom: 8px;
     }
     .project-title {
       font-family: var(--font-display); font-size: 17px; font-weight: 600;
@@ -204,32 +211,58 @@
       content: '▸'; position: absolute; left: 0;
       color: var(--accent); font-size: 10px; top: 7px;
     }
-    .project-footer { display: flex; justify-content: space-between; align-items: flex-end; gap: 12px; }
+    .project-footer {
+      display: flex; justify-content: space-between;
+      align-items: flex-end; gap: 12px;
+      flex-wrap: wrap;
+    }
     .project-tools { display: flex; flex-wrap: wrap; gap: 6px; }
     .tool-badge {
       font-family: var(--font-mono); font-size: 10px;
-      background: rgba(0,200,240,0.07); color: var(--accent);
-      border: 1px solid rgba(0,200,240,0.2);
+      background: var(--accent-glow); color: var(--accent);
+      border: 1px solid var(--accent-mid);
       padding: 3px 9px; border-radius: 4px;
     }
     .project-date { font-family: var(--font-mono); font-size: 11px; color: var(--text-dimmer); white-space: nowrap; }
+    .report-btn {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-family: var(--font-mono); font-size: 11px;
+      color: var(--accent); border: 1px solid var(--accent);
+      background: var(--accent-glow);
+      padding: 5px 12px; border-radius: var(--r);
+      transition: background var(--t), color var(--t);
+      white-space: nowrap;
+    }
+    .report-btn:hover { background: var(--accent); color: #fff; opacity: 1; }
+    .report-btn i { font-size: 11px; }
 
     /* ── EXPERIENCE ── */
     #experience { border-top: 1px solid var(--border); }
     .exp-card {
       background: var(--surface); border: 1px solid var(--border);
       border-radius: var(--r-lg); padding: 30px 32px;
+      box-shadow: var(--shadow);
     }
     .exp-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 20px; }
     .exp-role { font-family: var(--font-display); font-size: 18px; font-weight: 600; color: var(--text); }
     .exp-company { font-family: var(--font-display); font-size: 13.5px; color: var(--accent); margin-top: 4px; }
-    .exp-meta { text-align: right; }
+    .exp-meta { text-align: right; display: flex; flex-direction: column; align-items: flex-end; gap: 6px; }
     .exp-date { font-family: var(--font-mono); font-size: 12px; color: var(--text-dimmer); }
-    .exp-location { font-size: 12px; color: var(--text-dimmer); margin-top: 3px; }
+    .exp-location { font-size: 12px; color: var(--text-dimmer); }
+    .cert-btn {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-family: var(--font-mono); font-size: 11px;
+      color: var(--accent); border: 1px solid var(--accent);
+      background: var(--accent-glow);
+      padding: 5px 12px; border-radius: var(--r);
+      transition: background var(--t), color var(--t);
+      margin-top: 2px;
+    }
+    .cert-btn:hover { background: var(--accent); color: #fff; opacity: 1; }
     .exp-divider { border: none; border-top: 1px solid var(--border); margin: 0 0 20px; }
     .exp-list { list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 10px 28px; }
     .exp-list li { font-size: 13.5px; color: var(--text-dim); padding-left: 16px; position: relative; line-height: 1.5; }
-    .exp-list li::before { content: '▸'; position: absolute; left: 0; color: var(--copper); font-size: 10px; top: 4px; }
+    .exp-list li::before { content: '▸'; position: absolute; left: 0; color: var(--accent); font-size: 10px; top: 4px; }
 
     /* ── LEADERSHIP ── */
     #leadership { border-top: 1px solid var(--border); }
@@ -237,9 +270,10 @@
     .lead-card {
       background: var(--surface); border: 1px solid var(--border);
       border-radius: var(--r-lg); padding: 24px 26px;
-      transition: border-color var(--t);
+      box-shadow: var(--shadow);
+      transition: border-color var(--t), box-shadow var(--t);
     }
-    .lead-card:hover { border-color: rgba(0,200,240,0.35); }
+    .lead-card:hover { border-color: var(--accent); box-shadow: var(--shadow-hover); }
     .lead-title { font-family: var(--font-display); font-size: 16px; font-weight: 600; color: var(--text); margin-bottom: 4px; }
     .lead-org { font-size: 13px; color: var(--accent); margin-bottom: 14px; }
     .lead-desc { font-size: 13.5px; color: var(--text-dim); line-height: 1.6; }
@@ -251,9 +285,10 @@
       background: var(--surface); border: 1px solid var(--border);
       border-radius: var(--r-lg); padding: 22px 28px;
       display: flex; justify-content: space-between; align-items: center;
-      transition: border-color var(--t);
+      box-shadow: var(--shadow);
+      transition: border-color var(--t), box-shadow var(--t);
     }
-    .edu-card:hover { border-color: rgba(0,200,240,0.35); }
+    .edu-card:hover { border-color: var(--accent); box-shadow: var(--shadow-hover); }
     .edu-degree { font-family: var(--font-display); font-size: 15.5px; font-weight: 600; color: var(--text); }
     .edu-inst { font-size: 13px; color: var(--text-dim); margin-top: 3px; }
     .edu-right { text-align: right; }
@@ -268,12 +303,13 @@
       border-radius: var(--r-lg); padding: 18px 20px;
       display: flex; align-items: center; gap: 14px;
       color: var(--text) !important;
-      transition: border-color var(--t), background var(--t);
+      box-shadow: var(--shadow);
+      transition: border-color var(--t), box-shadow var(--t), background var(--t);
     }
-    .contact-link:hover { border-color: rgba(0,200,240,0.4); background: var(--surface-2); opacity: 1; }
+    .contact-link:hover { border-color: var(--accent); box-shadow: var(--shadow-hover); background: var(--surface-2); opacity: 1; }
     .contact-icon {
       width: 38px; height: 38px; border-radius: 8px;
-      background: var(--accent-glow);
+      background: var(--accent-glow); border: 1px solid var(--accent-mid);
       display: flex; align-items: center; justify-content: center;
       color: var(--accent); font-size: 15px; flex-shrink: 0;
     }
@@ -281,10 +317,10 @@
     .contact-value { font-size: 13px; color: var(--text); margin-top: 2px; word-break: break-all; }
 
     /* ── FOOTER ── */
-    footer { border-top: 1px solid var(--border); padding: 28px 24px; text-align: center; }
+    footer { border-top: 1px solid var(--border); padding: 28px 24px; text-align: center; background: var(--surface); }
     .footer-text { font-family: var(--font-mono); font-size: 12px; color: var(--text-dimmer); }
 
-    /* ── REVEAL ANIMATION ── */
+    /* ── REVEAL ── */
     .reveal { opacity: 0; transform: translateY(16px); transition: opacity 0.5s ease, transform 0.5s ease; }
     .reveal.visible { opacity: 1; transform: none; }
 
@@ -296,8 +332,8 @@
       .project-card.featured { grid-column: auto; }
       .exp-list { grid-template-columns: 1fr; }
       .leadership-grid { grid-template-columns: 1fr; }
-      .exp-header { flex-direction: column; gap: 6px; }
-      .exp-meta { text-align: left; }
+      .exp-header { flex-direction: column; gap: 8px; }
+      .exp-meta { text-align: left; align-items: flex-start; }
       h1 { font-size: clamp(34px, 10vw, 50px); }
     }
     @media (max-width: 520px) {
@@ -363,7 +399,7 @@
           <a href="https://bd.linkedin.com/in/efaz-m-afnan-feroz-ctg-bd" target="_blank" class="btn-secondary">
             <i class="fab fa-linkedin"></i> LinkedIn
           </a>
-          <a href="https://github.com/efaz-m-afnan-feroz-git" target="_blank" class="btn-secondary">
+          <a href="https://github.com/Efaz182002" target="_blank" class="btn-secondary">
             <i class="fab fa-github"></i> GitHub
           </a>
         </div>
@@ -441,7 +477,7 @@
             <li>Built a 6-cell CMOS library from transistor level: INV, NAND, AND, OR, XOR, Full Adder — each as complementary PMOS pull-up / NMOS pull-down networks</li>
             <li>Executed the complete hierarchical VLSI flow per cell: schematic entry → functional simulation → symbol creation → custom layout → DRC/LVS sign-off → AV parasitic extraction → pre/post-layout transient simulation</li>
             <li>Assembled 4-bit top-level chip layout with shared VDD/GND rails and labelled I/O pads (A[3:0], B[3:0], S[3:0], C_out); passed top-level DRC/LVS sign-off</li>
-            <li>Observed and documented ripple-delay propagation across carry chain in AV-extracted post-layout waveforms relative to pre-layout; delivered GDSII-ready chip layout</li>
+            <li>Observed and documented ripple-delay propagation across carry chain in AV-extracted post-layout waveforms; delivered GDSII-ready chip layout</li>
           </ul>
           <div class="project-footer">
             <div class="project-tools">
@@ -450,7 +486,12 @@
               <span class="tool-badge">GDSII</span>
               <span class="tool-badge">AV Extraction</span>
             </div>
-            <div class="project-date">Aug 2025</div>
+            <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+              <a href="reports/vlsi-rca-report.pdf" target="_blank" class="report-btn">
+                <i class="fa fa-file-pdf"></i> Report
+              </a>
+              <span class="project-date">Aug 2025</span>
+            </div>
           </div>
         </div>
 
@@ -461,16 +502,20 @@
             <li>Gate-level Verilog <code>full_adder</code> using <code>assign</code> and <code>or()</code> primitive; four instances in <code>Four_bit_RCA</code> with internal carry wires w0–w2 and dedicated Cin port</li>
             <li>Self-checking testbench: 7+8+0=15 and 15+9+1=25 — both cases passed XSim behavioural simulation with correct S[3:0] and Cout</li>
             <li>Synthesis on Kintex-7 (xc7k70tfbv676-1): 4 Slice LUTs, 14 Bonded IOBs (&lt;0.01% utilisation)</li>
-            <li>Critical path B[0]→S[3]: 4.94 ns total (logic 3.41 ns + route 1.53 ns) across 4 logic levels — synthesizable above 200 MHz</li>
+            <li>Critical path B[0]→S[3]: 4.94 ns total (logic 3.41 ns + route 1.53 ns) — synthesizable above 200 MHz</li>
           </ul>
           <div class="project-footer">
             <div class="project-tools">
               <span class="tool-badge">Verilog HDL</span>
               <span class="tool-badge">Vivado 2025.2</span>
-              <span class="tool-badge">XSim</span>
               <span class="tool-badge">Kintex-7</span>
             </div>
-            <div class="project-date">Jun 2026</div>
+            <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+              <a href="reports/vlsi-rca-rtl-report.pdf" target="_blank" class="report-btn">
+                <i class="fa fa-file-pdf"></i> Report
+              </a>
+              <span class="project-date">Jun 2026</span>
+            </div>
           </div>
         </div>
 
@@ -478,18 +523,22 @@
           <div class="project-type">B.Sc. Thesis &nbsp;·&nbsp; CUET</div>
           <div class="project-title">Triple-band Microstrip Patch Antenna — C-band, Wi-Fi 6E, X-band</div>
           <ul class="project-highlights">
-            <li>Single-layer rectangular patch (50×40 mm²) on Rogers RO4003C (εr = 3.55) achieving resonances at 4.141 GHz (C-band), 6.148 GHz (Wi-Fi 6E), and 8.407 GHz (X-band)</li>
-            <li>Square DGS (15×15 mm) etched in ground plane simultaneously shifted existing resonances and generated the X-band mode via inductive loading — mechanism confirmed via surface current plots</li>
-            <li>Final simulated: return loss −25.80/−14.63/−17.36 dB; VSWR 1.14/1.43/1.28; peak gain 5.88/5.70/3.65 dBi; radiation efficiency 93.6%/78.4%/67.8%</li>
-            <li>Only reviewed design covering C-band + Wi-Fi 6E + X-band using a simple rectangular DGS (no metamaterial)</li>
+            <li>Single-layer rectangular patch (50×40 mm²) on Rogers RO4003C (εr = 3.55) achieving resonances at 4.141 GHz, 6.148 GHz, and 8.407 GHz</li>
+            <li>Square DGS (15×15 mm) etched in ground plane simultaneously shifted existing resonances and generated the X-band mode via inductive loading — confirmed via surface current plots</li>
+            <li>Final: return loss −25.80/−14.63/−17.36 dB; VSWR 1.14/1.43/1.28; peak gain 5.88/5.70/3.65 dBi; efficiency 93.6%/78.4%/67.8%</li>
+            <li>Only reviewed design covering C-band + Wi-Fi 6E + X-band with simple rectangular DGS (no metamaterial)</li>
           </ul>
           <div class="project-footer">
             <div class="project-tools">
               <span class="tool-badge">CST Microwave Studio</span>
               <span class="tool-badge">Rogers RO4003C</span>
-              <span class="tool-badge">Time-Domain Solver</span>
             </div>
-            <div class="project-date">2025–2026</div>
+            <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+              <a href="reports/antenna-thesis.pdf" target="_blank" class="report-btn">
+                <i class="fa fa-file-pdf"></i> Thesis
+              </a>
+              <span class="project-date">2025–2026</span>
+            </div>
           </div>
         </div>
 
@@ -497,18 +546,22 @@
           <div class="project-type">CUET Academic Project</div>
           <div class="project-title">Electrical Services Design — Library &amp; Archival Vault</div>
           <ul class="project-highlights">
-            <li>Complete LV infrastructure for a 10-zone library/archive: ~18 kW connected load, split-bus distribution separating critical and non-critical loads, ATS for generator integration, 3× online UPS</li>
+            <li>Complete LV infrastructure for 10-zone library/archive: ~18 kW connected load, split-bus distribution, ATS for generator integration, 3× online UPS</li>
             <li>Archival environmental controls: UPS-backed dehumidifier, T/RH monitoring, PoE IP CCTV (IEEE 802.3af/at) with NVR</li>
-            <li>Delivered CAD conduit layouts, SLDs, load schedules, BoQ; BNBC 2020 lightning risk assessment (Risk Index = 39); copper plate earthing &lt;1 Ω</li>
+            <li>Delivered CAD layouts, SLDs, load schedules, BoQ; BNBC 2020 lightning risk assessment (Risk Index = 39); copper plate earthing &lt;1 Ω</li>
           </ul>
           <div class="project-footer">
             <div class="project-tools">
               <span class="tool-badge">AutoCAD</span>
               <span class="tool-badge">BNBC 2020</span>
               <span class="tool-badge">BS 7671</span>
-              <span class="tool-badge">NFPA 72</span>
             </div>
-            <div class="project-date">2026</div>
+            <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+              <a href="reports/electrical-services-report.pdf" target="_blank" class="report-btn">
+                <i class="fa fa-file-pdf"></i> Report
+              </a>
+              <span class="project-date">2026</span>
+            </div>
           </div>
         </div>
 
@@ -530,18 +583,22 @@
           <div class="exp-meta">
             <div class="exp-date">October 2025</div>
             <div class="exp-location">Dhaka, Bangladesh</div>
+            <!-- Replace the href below with your actual Siemens certificate link (Google Drive / LinkedIn) -->
+            <a href="YOUR_CERTIFICATE_LINK_HERE" target="_blank" class="cert-btn">
+              <i class="fa fa-certificate"></i> View Certificate
+            </a>
           </div>
         </div>
         <hr class="exp-divider" />
         <ul class="exp-list">
           <li>Bangladesh power sector structure: generation 10–20 kV, transmission 132/230/400 kV, distribution 0.415 kV; Siemens role in GIS, protection, and automation</li>
-          <li>AIS vs. GIS switchgear: 8DA10/8DB10 metal-enclosed units, single-phase encapsulation, ring-core CTs, SF₆ supervision (70–180 kPa)</li>
+          <li>AIS vs. GIS switchgear: 8DA10/8DB10 metal-enclosed units, ring-core CTs, SF₆ supervision (70–180 kPa)</li>
           <li>LV equipment: ACBs with LSIG protection (150 kA), MCCBs, RCCBs, motor starters — DOL, star-delta, soft-starter, VFD (SINAMICS)</li>
           <li>Transformer technology: oil-immersed vs. dry-type (cast resin), 8 FAT tests, Buchholz/differential protection, SENSFORMER IoT monitoring</li>
           <li>Protection relays: ANSI codes 25, 50/51, 67/67N, 87T, 87B, REF; Siemens SIPROTEC-4/-5; DFDR fault location</li>
           <li>Automation: PLC/SCADA/HMI via TIA Portal; IEC 61850, MODBUS TCP/IP, IEC 60870-5-104 protocols</li>
           <li>Design tools: PSS SINCAL (power system analysis), SIMARIS (installation design)</li>
-          <li>EHS: Siemens 6 Golden Rules, permit-to-work, LOTO, step/touch potential, 30 mA RCDs for personal protection</li>
+          <li>EHS: Siemens 6 Golden Rules, permit-to-work, LOTO, step/touch potential, 30 mA RCDs</li>
         </ul>
       </div>
     </div>
@@ -561,7 +618,7 @@
         <div class="lead-card reveal">
           <div class="lead-title">Participant · 2 Consecutive Editions</div>
           <div class="lead-org">FTC Case Competition · IEEE CUET Student Branch</div>
-          <p class="lead-desc">Addressed real challenges for PHP Float Glass Industries Ltd.: water scarcity, high furnace energy consumption, and low market awareness. Proposed rainwater harvesting, energy-efficient furnace replacement, and value-focused decorative glass campaigns.</p>
+          <p class="lead-desc">Addressed real challenges for PHP Float Glass Industries Ltd.: water scarcity, high furnace energy consumption, and low market awareness. Proposed rainwater harvesting, energy-efficient furnace replacement, and decorative glass campaigns.</p>
         </div>
       </div>
     </div>
@@ -634,11 +691,11 @@
             <div class="contact-value">efaz-m-afnan-feroz-ctg-bd</div>
           </div>
         </a>
-        <a href="https://github.com/efaz-m-afnan-feroz-git" target="_blank" class="contact-link">
+        <a href="https://github.com/Efaz182002" target="_blank" class="contact-link">
           <div class="contact-icon"><i class="fab fa-github"></i></div>
           <div>
             <div class="contact-label">GitHub</div>
-            <div class="contact-value">efaz-m-afnan-feroz-git</div>
+            <div class="contact-value">Efaz182002</div>
           </div>
         </a>
       </div>
@@ -668,10 +725,11 @@
         links.style.top = '58px';
         links.style.left = '0';
         links.style.right = '0';
-        links.style.background = 'rgba(8,13,26,0.97)';
+        links.style.background = 'rgba(243,249,245,0.97)';
         links.style.padding = '16px 28px 20px';
-        links.style.borderBottom = '1px solid #1E2D4A';
+        links.style.borderBottom = '1px solid #C4DCCB';
         links.style.gap = '14px';
+        links.style.boxShadow = '0 4px 12px rgba(0,0,0,0.08)';
       }
     }
 
