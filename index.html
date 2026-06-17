@@ -5,351 +5,334 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Efaz M. Afnan Feroz — Aspiring VLSI &amp; IC Design Engineer</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
   <style>
     :root {
-      --bg:          #F3F9F5;
-      --surface:     #FFFFFF;
-      --surface-2:   #EAF4EE;
-      --border:      #C4DCCB;
-      --accent:      #0B7A40;
-      --accent-glow: rgba(11,122,64,0.08);
-      --accent-mid:  rgba(11,122,64,0.18);
-      --warm:        #6B4C1A;
-      --text:        #0C1E14;
-      --text-dim:    #3B6450;
-      --text-dimmer: #7BA08A;
-      --font-display:'Space Grotesk', sans-serif;
-      --font-body:   'Inter', sans-serif;
-      --font-mono:   'IBM Plex Mono', monospace;
-      --r:           8px;
-      --r-lg:        14px;
-      --t:           0.2s ease;
-      --shadow:      0 1px 4px rgba(0,0,0,0.07);
-      --shadow-hover:0 4px 16px rgba(11,122,64,0.13);
+      --bg: #0A0E14;
+      --surface: #131A23;
+      --surface2: #1A2330;
+      --border: #2A3A4A;
+      --accent: #00E676;
+      --accent-glow: rgba(0, 230, 118, 0.2);
+      --accent-mid: rgba(0, 230, 118, 0.4);
+      --text: #E0E7F0;
+      --text-dim: #8FA4B8;
+      --text-dimmer: #546A80;
+      --font-display: 'Outfit', sans-serif;
+      --font-mono: 'IBM Plex Mono', monospace;
+      --r: 6px;
+      --r-lg: 12px;
+      --t: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      --shadow: 0 4px 20px rgba(0,0,0,0.5);
+      --shadow-hover: 0 8px 32px rgba(0,230,118,0.15);
     }
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
     body {
       background: var(--bg);
       color: var(--text);
-      font-family: var(--font-body);
+      font-family: var(--font-display);
       font-size: 15px;
-      line-height: 1.65;
+      line-height: 1.7;
       -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
     }
-    a { color: var(--accent); text-decoration: none; transition: opacity var(--t); }
-    a:hover { opacity: 0.72; }
-    .container { max-width: 1060px; margin: 0 auto; padding: 0 24px; }
-    section { padding: 80px 0; }
+    a { color: var(--accent); text-decoration: none; transition: all var(--t); }
+    a:hover { text-shadow: 0 0 8px var(--accent-glow); }
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 30px; }
 
-    /* ── NAV ── */
-    nav {
+    /* ── animated background canvas ── */
+    #particle-canvas {
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      z-index: 0; pointer-events: none; opacity: 0.25;
+    }
+
+    /* ── HEADER ── */
+    header {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      height: 58px; padding: 0 28px;
+      background: rgba(10,14,20,0.85); backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 30px; height: 64px;
       display: flex; align-items: center; justify-content: space-between;
-      background: rgba(243,249,245,0.88);
-      backdrop-filter: blur(14px);
-      border-bottom: 1px solid transparent;
-      transition: border-color 0.3s ease;
     }
-    nav.scrolled { border-bottom-color: var(--border); box-shadow: 0 1px 8px rgba(0,0,0,0.06); }
-    .nav-logo { font-family: var(--font-mono); font-size: 13px; font-weight: 500; color: var(--accent); letter-spacing: 0.06em; }
-    .nav-links { display: flex; gap: 30px; list-style: none; }
-    .nav-links a { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.04em; color: var(--text-dim); transition: color var(--t); }
-    .nav-links a:hover { color: var(--text); opacity: 1; }
+    .logo {
+      font-family: var(--font-mono); font-size: 14px; font-weight: 500;
+      color: var(--accent); letter-spacing: 0.1em;
+    }
+    .nav-links { display: flex; gap: 32px; list-style: none; }
+    .nav-links a {
+      font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em;
+      color: var(--text-dim); text-transform: uppercase;
+    }
+    .nav-links a:hover { color: var(--accent); text-shadow: 0 0 8px var(--accent-glow); }
     .nav-cta {
-      font-family: var(--font-mono); font-size: 12px;
+      border: 1px solid var(--accent); padding: 6px 16px; border-radius: var(--r);
       color: var(--accent) !important;
-      border: 1px solid var(--accent);
-      padding: 5px 14px; border-radius: var(--r);
-      transition: background var(--t) !important;
     }
-    .nav-cta:hover { background: var(--accent-glow); opacity: 1 !important; }
-    .nav-hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
-    .nav-hamburger span { display: block; width: 22px; height: 1.5px; background: var(--text-dim); transition: var(--t); }
+    .nav-cta:hover { background: var(--accent-glow); }
+    .menu-toggle { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+    .menu-toggle span { width: 22px; height: 2px; background: var(--accent); border-radius: 2px; }
+
+    /* ── SECTIONS ── */
+    section { position: relative; z-index: 2; padding: 100px 0; }
+    .section-header { text-align: center; margin-bottom: 60px; }
+    .section-tag {
+      font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.2em;
+      color: var(--accent); text-transform: uppercase; margin-bottom: 12px;
+    }
+    .section-title {
+      font-size: clamp(28px, 5vw, 42px); font-weight: 700; color: var(--text);
+      position: relative; display: inline-block;
+    }
+    .section-title::after {
+      content: ''; position: absolute; bottom: -8px; left: 50%; transform: translateX(-50%);
+      width: 48px; height: 3px; background: var(--accent); border-radius: 2px;
+    }
 
     /* ── HERO ── */
     #hero {
       min-height: 100vh; display: flex; align-items: center;
-      position: relative; overflow: hidden; padding-top: 58px;
+      position: relative; z-index: 2; padding-top: 64px;
     }
-    #hero::before {
-      content: '';
-      position: absolute; inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' xmlns='http://www.w3.org/2000/svg'%3E%3Cg stroke='%230B7A40' stroke-width='0.7' opacity='0.08' fill='none'%3E%3Cline x1='0' y1='25' x2='40' y2='25'/%3E%3Cline x1='60' y1='25' x2='100' y2='25'/%3E%3Cline x1='0' y1='75' x2='100' y2='75'/%3E%3Cline x1='25' y1='0' x2='25' y2='100'/%3E%3Cline x1='75' y1='0' x2='75' y2='60'/%3E%3Cline x1='75' y1='80' x2='75' y2='100'/%3E%3Ccircle cx='25' cy='25' r='2.5' fill='%230B7A40' opacity='0.22'/%3E%3Ccircle cx='75' cy='75' r='2.5' fill='%230B7A40' opacity='0.22'/%3E%3Ccircle cx='25' cy='75' r='1.5' fill='%230B7A40' opacity='0.14'/%3E%3Ccircle cx='75' cy='25' r='1.5' fill='%230B7A40' opacity='0.10'/%3E%3C/g%3E%3C/svg%3E");
-      pointer-events: none;
+    .hero-grid {
+      display: flex; align-items: center; gap: 60px; flex-wrap: wrap;
+      max-width: 1200px; margin: 0 auto; padding: 0 30px;
     }
-    #hero::after {
-      content: '';
-      position: absolute; inset: 0;
-      background: radial-gradient(ellipse 72% 80% at 28% 50%, transparent 30%, var(--bg) 100%);
-      pointer-events: none;
+    .hero-text { flex: 1 1 500px; }
+    .hero-photo {
+      flex-shrink: 0; position: relative;
+      width: 260px; height: 260px;
+      border-radius: 50%; background: var(--surface2);
+      border: 3px solid var(--accent);
+      box-shadow: 0 0 40px var(--accent-glow);
+      overflow: hidden;
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-mono); color: var(--text-dimmer); font-size: 14px;
     }
-    .hero-content { position: relative; z-index: 1; max-width: 680px; }
-    .hero-eyebrow {
-      font-family: var(--font-mono); font-size: 11.5px;
-      letter-spacing: 0.18em; color: var(--accent); text-transform: uppercase;
-      margin-bottom: 20px; display: flex; align-items: center; gap: 10px;
+    .hero-photo img { width: 100%; height: 100%; object-fit: cover; }
+    .hero-greeting {
+      font-family: var(--font-mono); font-size: 13px; color: var(--accent);
+      letter-spacing: 0.1em; margin-bottom: 12px;
     }
-    .hero-eyebrow::before { content: ''; display: block; width: 26px; height: 1px; background: var(--accent); }
     h1 {
-      font-family: var(--font-display);
-      font-size: clamp(38px, 6.5vw, 68px);
-      font-weight: 700; line-height: 1.08;
-      letter-spacing: -0.025em; color: var(--text);
-      margin-bottom: 14px;
+      font-size: clamp(40px, 8vw, 72px); font-weight: 700;
+      line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 16px;
+      color: var(--text);
     }
+    .highlight { color: var(--accent); text-shadow: 0 0 18px var(--accent-glow); }
     .hero-role {
-      font-family: var(--font-display);
-      font-size: clamp(14px, 1.8vw, 17px);
-      font-weight: 400; color: var(--text-dim);
-      margin-bottom: 24px; line-height: 1.4;
+      font-size: 16px; color: var(--text-dim); margin-bottom: 24px;
+      font-family: var(--font-mono); letter-spacing: 0.04em;
     }
-    .hero-role span { color: var(--accent); font-weight: 600; }
     .hero-bio {
-      font-size: 14.5px; color: var(--text-dim);
-      max-width: 540px; margin-bottom: 34px; line-height: 1.72;
+      color: var(--text-dim); max-width: 500px; margin-bottom: 30px; line-height: 1.8;
     }
     .hero-stats {
-      display: flex; margin-bottom: 38px;
-      border: 1px solid var(--border); border-radius: var(--r);
+      display: flex; gap: 2px; margin-bottom: 36px;
+      background: var(--surface); border: 1px solid var(--border); border-radius: var(--r);
       overflow: hidden; width: fit-content;
-      background: var(--surface);
-      box-shadow: var(--shadow);
     }
-    .stat-item { padding: 12px 22px; border-right: 1px solid var(--border); text-align: center; }
+    .stat-item {
+      padding: 16px 24px; text-align: center; background: var(--surface2);
+      border-right: 1px solid var(--border);
+    }
     .stat-item:last-child { border-right: none; }
-    .stat-value { font-family: var(--font-mono); font-size: 19px; font-weight: 500; color: var(--accent); display: block; }
+    .stat-value { font-family: var(--font-mono); font-size: 22px; font-weight: 600; color: var(--accent); }
     .stat-label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-dimmer); }
-    .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+    .hero-btns { display: flex; gap: 14px; flex-wrap: wrap; }
+    .btn {
+      padding: 12px 28px; border-radius: var(--r); font-weight: 600;
+      font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.06em;
+      display: inline-flex; align-items: center; gap: 8px;
+      transition: all var(--t); cursor: pointer; border: 1px solid transparent;
+    }
     .btn-primary {
-      background: var(--accent); color: #fff;
-      font-family: var(--font-display); font-weight: 600; font-size: 14px;
-      padding: 11px 24px; border-radius: var(--r);
-      display: inline-flex; align-items: center; gap: 8px;
-      transition: opacity var(--t); box-shadow: 0 2px 8px rgba(11,122,64,0.25);
+      background: var(--accent); color: #0A0E14; border-color: var(--accent);
+      box-shadow: 0 0 20px var(--accent-glow);
     }
-    .btn-primary:hover { opacity: 0.86; }
+    .btn-primary:hover { box-shadow: 0 0 32px var(--accent-glow); }
     .btn-secondary {
-      background: var(--surface); color: var(--text);
-      font-family: var(--font-display); font-weight: 500; font-size: 14px;
-      padding: 11px 24px; border-radius: var(--r);
-      border: 1px solid var(--border);
-      display: inline-flex; align-items: center; gap: 8px;
-      transition: border-color var(--t), background var(--t);
-      box-shadow: var(--shadow);
+      background: transparent; border-color: var(--border); color: var(--text);
     }
-    .btn-secondary:hover { border-color: var(--accent); background: var(--surface-2); color: var(--text); opacity: 1; }
+    .btn-secondary:hover { border-color: var(--accent); background: var(--accent-glow); }
 
-    /* ── SECTION LABELS ── */
-    .section-label {
-      font-family: var(--font-mono); font-size: 10.5px;
-      letter-spacing: 0.18em; text-transform: uppercase;
-      color: var(--accent); margin-bottom: 8px;
+    /* ── SKILLS HEX GRID ── */
+    .hex-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
     }
-    .section-title {
-      font-family: var(--font-display); font-size: 27px; font-weight: 600;
-      color: var(--text); margin-bottom: 36px;
-    }
-
-    /* ── SKILLS ── */
-    #skills { border-top: 1px solid var(--border); }
-    .skills-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 14px; }
-    .skill-card {
+    .hex-card {
       background: var(--surface); border: 1px solid var(--border);
-      border-radius: var(--r-lg); padding: 20px 22px;
-      box-shadow: var(--shadow);
-      transition: border-color var(--t), box-shadow var(--t), background var(--t);
+      border-radius: var(--r-lg); padding: 24px; transition: all var(--t);
+      position: relative; overflow: hidden;
     }
-    .skill-card:hover { border-color: var(--accent); box-shadow: var(--shadow-hover); background: var(--surface-2); }
-    .skill-card-title {
-      font-family: var(--font-mono); font-size: 10px;
-      letter-spacing: 0.14em; text-transform: uppercase;
-      color: var(--accent); margin-bottom: 14px;
+    .hex-card:hover {
+      border-color: var(--accent); box-shadow: var(--shadow-hover);
+      transform: translateY(-4px);
     }
-    .skill-tags { display: flex; flex-wrap: wrap; gap: 7px; }
+    .hex-card::before {
+      content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 3px;
+      background: linear-gradient(90deg, transparent, var(--accent), transparent);
+      opacity: 0; transition: opacity var(--t);
+    }
+    .hex-card:hover::before { opacity: 1; }
+    .hex-title {
+      font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em;
+      color: var(--accent); text-transform: uppercase; margin-bottom: 16px;
+    }
+    .tags { display: flex; flex-wrap: wrap; gap: 6px; }
     .tag {
-      font-family: var(--font-mono); font-size: 11px;
-      background: var(--surface-2); color: var(--text-dim);
-      border: 1px solid var(--border);
-      padding: 4px 10px; border-radius: 4px;
+      background: var(--surface2); color: var(--text-dim);
+      padding: 4px 10px; border-radius: 4px; font-size: 12px;
+      font-family: var(--font-mono); border: 1px solid var(--border);
     }
 
     /* ── PROJECTS ── */
-    #projects { border-top: 1px solid var(--border); }
-    .projects-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+    .projects-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 24px;
+    }
     .project-card {
       background: var(--surface); border: 1px solid var(--border);
-      border-radius: var(--r-lg); padding: 26px;
+      border-radius: var(--r-lg); padding: 30px;
       display: flex; flex-direction: column;
-      box-shadow: var(--shadow);
-      transition: border-color var(--t), box-shadow var(--t), transform var(--t);
+      transition: all var(--t); position: relative;
     }
-    .project-card:hover { border-color: var(--accent); box-shadow: var(--shadow-hover); transform: translateY(-2px); }
-    .project-card.featured {
-      grid-column: 1 / -1;
-      border-left: 3px solid var(--accent);
-    }
-    .project-type {
-      font-family: var(--font-mono); font-size: 10px;
-      letter-spacing: 0.13em; text-transform: uppercase;
-      color: var(--warm); margin-bottom: 8px;
+    .project-card.featured { grid-column: 1 / -1; border-left: 3px solid var(--accent); }
+    .project-card:hover { border-color: var(--accent); box-shadow: var(--shadow-hover); }
+    .project-chip {
+      font-family: var(--font-mono); font-size: 10px; color: var(--accent);
+      text-transform: uppercase; letter-spacing: 0.15em; margin-bottom: 8px;
     }
     .project-title {
-      font-family: var(--font-display); font-size: 17px; font-weight: 600;
-      color: var(--text); margin-bottom: 14px; line-height: 1.3;
+      font-size: 20px; font-weight: 700; margin-bottom: 18px; color: var(--text);
     }
-    .project-card.featured .project-title { font-size: 20px; }
-    .project-highlights { list-style: none; margin-bottom: 20px; flex: 1; }
-    .project-highlights li {
-      font-size: 13.5px; color: var(--text-dim);
-      padding: 5px 0 5px 16px; position: relative; line-height: 1.55;
+    .project-desc { list-style: none; margin-bottom: 24px; flex: 1; }
+    .project-desc li {
+      font-size: 14px; color: var(--text-dim); padding: 6px 0 6px 16px;
+      position: relative; line-height: 1.6;
     }
-    .project-highlights li::before {
-      content: '▸'; position: absolute; left: 0;
-      color: var(--accent); font-size: 10px; top: 7px;
+    .project-desc li::before {
+      content: '›'; position: absolute; left: 0; color: var(--accent); font-weight: 700;
     }
     .project-footer {
-      display: flex; justify-content: space-between;
-      align-items: flex-end; gap: 12px;
-      flex-wrap: wrap;
+      display: flex; justify-content: space-between; align-items: flex-end;
+      flex-wrap: wrap; gap: 12px; border-top: 1px solid var(--border); padding-top: 18px;
     }
-    .project-tools { display: flex; flex-wrap: wrap; gap: 6px; }
-    .tool-badge {
-      font-family: var(--font-mono); font-size: 10px;
+    .tools { display: flex; flex-wrap: wrap; gap: 6px; }
+    .tool {
       background: var(--accent-glow); color: var(--accent);
-      border: 1px solid var(--accent-mid);
-      padding: 3px 9px; border-radius: 4px;
+      padding: 4px 12px; border-radius: 4px; font-size: 11px;
+      font-family: var(--font-mono); border: 1px solid var(--accent-mid);
     }
-    .project-date { font-family: var(--font-mono); font-size: 11px; color: var(--text-dimmer); white-space: nowrap; }
+    .project-date { font-family: var(--font-mono); font-size: 12px; color: var(--text-dimmer); }
     .report-btn {
+      padding: 8px 16px; border: 1px solid var(--accent);
+      background: var(--accent-glow); color: var(--accent);
+      font-family: var(--font-mono); font-size: 11px; border-radius: var(--r);
       display: inline-flex; align-items: center; gap: 6px;
-      font-family: var(--font-mono); font-size: 11px;
-      color: var(--accent); border: 1px solid var(--accent);
-      background: var(--accent-glow);
-      padding: 5px 12px; border-radius: var(--r);
-      transition: background var(--t), color var(--t);
-      white-space: nowrap;
+      transition: all var(--t);
     }
-    .report-btn:hover { background: var(--accent); color: #fff; opacity: 1; }
-    .report-btn i { font-size: 11px; }
+    .report-btn:hover { background: var(--accent); color: #0A0E14; }
 
     /* ── EXPERIENCE ── */
-    #experience { border-top: 1px solid var(--border); }
     .exp-card {
       background: var(--surface); border: 1px solid var(--border);
-      border-radius: var(--r-lg); padding: 30px 32px;
-      box-shadow: var(--shadow);
+      border-radius: var(--r-lg); padding: 36px;
     }
-    .exp-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 20px; }
-    .exp-role { font-family: var(--font-display); font-size: 18px; font-weight: 600; color: var(--text); }
-    .exp-company { font-family: var(--font-display); font-size: 13.5px; color: var(--accent); margin-top: 4px; }
-    .exp-meta { text-align: right; display: flex; flex-direction: column; align-items: flex-end; gap: 6px; }
-    .exp-date { font-family: var(--font-mono); font-size: 12px; color: var(--text-dimmer); }
-    .exp-location { font-size: 12px; color: var(--text-dimmer); }
+    .exp-header { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 20px; margin-bottom: 24px; }
+    .exp-role { font-size: 22px; font-weight: 700; }
+    .exp-company { color: var(--accent); font-weight: 500; margin-top: 6px; }
+    .exp-meta { text-align: right; }
+    .exp-date, .exp-location { color: var(--text-dimmer); font-family: var(--font-mono); font-size: 13px; }
     .cert-btn {
       display: inline-flex; align-items: center; gap: 6px;
-      font-family: var(--font-mono); font-size: 11px;
-      color: var(--accent); border: 1px solid var(--accent);
-      background: var(--accent-glow);
-      padding: 5px 12px; border-radius: var(--r);
-      transition: background var(--t), color var(--t);
-      margin-top: 2px;
+      padding: 8px 16px; border: 1px solid var(--accent);
+      background: var(--accent-glow); color: var(--accent);
+      font-family: var(--font-mono); font-size: 11px; border-radius: var(--r);
+      margin-top: 8px; transition: all var(--t);
     }
-    .cert-btn:hover { background: var(--accent); color: #fff; opacity: 1; }
-    .exp-divider { border: none; border-top: 1px solid var(--border); margin: 0 0 20px; }
-    .exp-list { list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 10px 28px; }
-    .exp-list li { font-size: 13.5px; color: var(--text-dim); padding-left: 16px; position: relative; line-height: 1.5; }
-    .exp-list li::before { content: '▸'; position: absolute; left: 0; color: var(--accent); font-size: 10px; top: 4px; }
+    .cert-btn:hover { background: var(--accent); color: #0A0E14; }
+    .exp-divider { border-color: var(--border); margin: 20px 0; }
+    .exp-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 12px 32px; }
+    .exp-grid li { color: var(--text-dim); font-size: 14px; padding-left: 18px; position: relative; }
+    .exp-grid li::before { content: '▹'; position: absolute; left: 0; color: var(--accent); }
 
     /* ── LEADERSHIP ── */
-    #leadership { border-top: 1px solid var(--border); }
-    .leadership-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+    .leadership-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
     .lead-card {
       background: var(--surface); border: 1px solid var(--border);
-      border-radius: var(--r-lg); padding: 24px 26px;
-      box-shadow: var(--shadow);
-      transition: border-color var(--t), box-shadow var(--t);
+      border-radius: var(--r-lg); padding: 28px; transition: all var(--t);
     }
     .lead-card:hover { border-color: var(--accent); box-shadow: var(--shadow-hover); }
-    .lead-title { font-family: var(--font-display); font-size: 16px; font-weight: 600; color: var(--text); margin-bottom: 4px; }
-    .lead-org { font-size: 13px; color: var(--accent); margin-bottom: 14px; }
-    .lead-desc { font-size: 13.5px; color: var(--text-dim); line-height: 1.6; }
+    .lead-title { font-size: 18px; font-weight: 700; margin-bottom: 6px; }
+    .lead-org { color: var(--accent); font-size: 14px; margin-bottom: 16px; }
+    .lead-desc { color: var(--text-dim); font-size: 14px; line-height: 1.6; }
 
     /* ── EDUCATION ── */
-    #education { border-top: 1px solid var(--border); }
-    .edu-grid { display: grid; gap: 12px; }
-    .edu-card {
+    .edu-list { display: grid; gap: 16px; }
+    .edu-item {
       background: var(--surface); border: 1px solid var(--border);
-      border-radius: var(--r-lg); padding: 22px 28px;
+      border-radius: var(--r-lg); padding: 24px 32px;
       display: flex; justify-content: space-between; align-items: center;
-      box-shadow: var(--shadow);
-      transition: border-color var(--t), box-shadow var(--t);
+      transition: all var(--t);
     }
-    .edu-card:hover { border-color: var(--accent); box-shadow: var(--shadow-hover); }
-    .edu-degree { font-family: var(--font-display); font-size: 15.5px; font-weight: 600; color: var(--text); }
-    .edu-inst { font-size: 13px; color: var(--text-dim); margin-top: 3px; }
+    .edu-item:hover { border-color: var(--accent); box-shadow: var(--shadow-hover); }
+    .edu-degree { font-weight: 700; font-size: 17px; }
+    .edu-school { color: var(--text-dim); margin-top: 4px; }
     .edu-right { text-align: right; }
-    .edu-gpa { font-family: var(--font-mono); font-size: 18px; font-weight: 500; color: var(--accent); }
-    .edu-year { font-family: var(--font-mono); font-size: 11px; color: var(--text-dimmer); margin-top: 3px; }
+    .edu-gpa { font-family: var(--font-mono); font-size: 20px; color: var(--accent); font-weight: 600; }
+    .edu-year { font-family: var(--font-mono); font-size: 12px; color: var(--text-dimmer); }
 
     /* ── CONTACT ── */
-    #contact { border-top: 1px solid var(--border); }
-    .contact-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 14px; }
-    .contact-link {
+    .contact-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+    }
+    .contact-item {
       background: var(--surface); border: 1px solid var(--border);
-      border-radius: var(--r-lg); padding: 18px 20px;
+      border-radius: var(--r-lg); padding: 20px;
       display: flex; align-items: center; gap: 14px;
-      color: var(--text) !important;
-      box-shadow: var(--shadow);
-      transition: border-color var(--t), box-shadow var(--t), background var(--t);
+      color: var(--text); transition: all var(--t);
     }
-    .contact-link:hover { border-color: var(--accent); box-shadow: var(--shadow-hover); background: var(--surface-2); opacity: 1; }
+    .contact-item:hover { border-color: var(--accent); box-shadow: var(--shadow-hover); }
     .contact-icon {
-      width: 38px; height: 38px; border-radius: 8px;
-      background: var(--accent-glow); border: 1px solid var(--accent-mid);
+      width: 40px; height: 40px; background: var(--accent-glow);
+      border: 1px solid var(--accent-mid); border-radius: 8px;
       display: flex; align-items: center; justify-content: center;
-      color: var(--accent); font-size: 15px; flex-shrink: 0;
+      color: var(--accent); font-size: 16px;
     }
-    .contact-label { font-size: 10.5px; color: var(--text-dimmer); text-transform: uppercase; letter-spacing: 0.09em; font-family: var(--font-mono); }
-    .contact-value { font-size: 13px; color: var(--text); margin-top: 2px; word-break: break-all; }
+    .contact-label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-dimmer); }
+    .contact-value { font-size: 14px; margin-top: 4px; }
 
     /* ── FOOTER ── */
-    footer { border-top: 1px solid var(--border); padding: 28px 24px; text-align: center; background: var(--surface); }
-    .footer-text { font-family: var(--font-mono); font-size: 12px; color: var(--text-dimmer); }
-
-    /* ── REVEAL ── */
-    .reveal { opacity: 0; transform: translateY(16px); transition: opacity 0.5s ease, transform 0.5s ease; }
-    .reveal.visible { opacity: 1; transform: none; }
+    footer {
+      text-align: center; padding: 30px; border-top: 1px solid var(--border);
+      color: var(--text-dimmer); font-family: var(--font-mono); font-size: 13px;
+    }
 
     /* ── RESPONSIVE ── */
     @media (max-width: 768px) {
-      .nav-links { display: none; }
-      .nav-hamburger { display: flex; }
-      .projects-grid { grid-template-columns: 1fr; }
+      .menu-toggle { display: flex; }
+      .nav-links {
+        display: none; flex-direction: column; position: absolute;
+        top: 64px; left: 0; right: 0; background: rgba(10,14,20,0.95);
+        padding: 20px; gap: 16px; border-bottom: 1px solid var(--border);
+      }
+      .nav-links.active { display: flex; }
+      .hero-grid { flex-direction: column-reverse; gap: 32px; }
+      .hero-photo { width: 180px; height: 180px; }
       .project-card.featured { grid-column: auto; }
-      .exp-list { grid-template-columns: 1fr; }
-      .leadership-grid { grid-template-columns: 1fr; }
-      .exp-header { flex-direction: column; gap: 8px; }
-      .exp-meta { text-align: left; align-items: flex-start; }
-      h1 { font-size: clamp(34px, 10vw, 50px); }
-    }
-    @media (max-width: 520px) {
-      section { padding: 56px 0; }
-      .hero-stats { flex-wrap: wrap; }
-      .stat-item { padding: 10px 16px; }
-      .edu-card { flex-direction: column; align-items: flex-start; gap: 8px; }
-      .edu-right { text-align: left; }
     }
   </style>
 </head>
 <body>
+  <!-- animated network background -->
+  <canvas id="particle-canvas"></canvas>
 
-  <!-- NAV -->
-  <nav id="navbar">
-    <span class="nav-logo">efaz.dev</span>
+  <header>
+    <div class="logo">efaz.dev</div>
     <ul class="nav-links" id="navLinks">
       <li><a href="#skills">Skills</a></li>
       <li><a href="#projects">Projects</a></li>
@@ -357,52 +340,36 @@
       <li><a href="#education">Education</a></li>
       <li><a href="#contact" class="nav-cta">Contact</a></li>
     </ul>
-    <div class="nav-hamburger" id="hamburger" onclick="toggleMenu()">
+    <div class="menu-toggle" id="menuToggle" onclick="toggleMenu()">
       <span></span><span></span><span></span>
     </div>
-  </nav>
+  </header>
 
   <!-- HERO -->
   <section id="hero">
-    <div class="container">
-      <div class="hero-content">
-        <div class="hero-eyebrow">B.Sc. EEE &nbsp;·&nbsp; CUET &nbsp;·&nbsp; Batch 2020</div>
-        <h1>Efaz M.<br>Afnan Feroz</h1>
-        <p class="hero-role">
-          <span>VLSI Physical Design</span>&nbsp; · &nbsp;RTL Design&nbsp; · &nbsp;IC Verification
-        </p>
+    <div class="hero-grid">
+      <div class="hero-text">
+        <div class="hero-greeting">B.Sc. EEE · CUET · Batch 2020</div>
+        <h1>Efaz M.<br><span class="highlight">Afnan Feroz</span></h1>
+        <p class="hero-role">VLSI Physical Design · RTL Design · IC Verification</p>
         <p class="hero-bio">
           Fresh EEE graduate with hands-on experience from transistor-level CMOS layout through DRC/LVS sign-off and GDSII output, plus Verilog RTL synthesis on real FPGA silicon. Based in Chattogram, targeting semiconductor roles in Bangladesh and Malaysia.
         </p>
         <div class="hero-stats">
-          <div class="stat-item">
-            <span class="stat-value">3.72</span>
-            <span class="stat-label">CGPA / 4.00</span>
-          </div>
-          <div class="stat-item">
-            <span class="stat-value">6</span>
-            <span class="stat-label">CMOS Cells</span>
-          </div>
-          <div class="stat-item">
-            <span class="stat-value">4.94 ns</span>
-            <span class="stat-label">Critical Path</span>
-          </div>
-          <div class="stat-item">
-            <span class="stat-value">3</span>
-            <span class="stat-label">Antenna Bands</span>
-          </div>
+          <div class="stat-item"><span class="stat-value">3.72</span><span class="stat-label">CGPA</span></div>
+          <div class="stat-item"><span class="stat-value">6</span><span class="stat-label">CMOS Cells</span></div>
+          <div class="stat-item"><span class="stat-value">4.94 ns</span><span class="stat-label">Critical Path</span></div>
+          <div class="stat-item"><span class="stat-value">3</span><span class="stat-label">Antenna Bands</span></div>
         </div>
-        <div class="hero-actions">
-          <a href="mailto:efazm.afnanferoz@gmail.com" class="btn-primary">
-            <i class="fa fa-envelope"></i> Get in Touch
-          </a>
-          <a href="https://bd.linkedin.com/in/efaz-m-afnan-feroz-ctg-bd" target="_blank" class="btn-secondary">
-            <i class="fab fa-linkedin"></i> LinkedIn
-          </a>
-          <a href="https://github.com/efaz-m-afnan-feroz-git" target="_blank" class="btn-secondary">
-            <i class="fab fa-github"></i> GitHub
-          </a>
+        <div class="hero-btns">
+          <a href="mailto:efazm.afnanferoz@gmail.com" class="btn btn-primary"><i class="fa fa-envelope"></i> Get in Touch</a>
+          <a href="https://bd.linkedin.com/in/efaz-m-afnan-feroz-ctg-bd" target="_blank" class="btn btn-secondary"><i class="fab fa-linkedin"></i> LinkedIn</a>
+          <a href="https://github.com/efaz-m-afnan-feroz-git" target="_blank" class="btn btn-secondary"><i class="fab fa-github"></i> GitHub</a>
         </div>
+      </div>
+      <div class="hero-photo">
+        <!-- Displays your GitHub profile picture -->
+        <img src="https://github.com/efaz-m-afnan-feroz-git.png" alt="Efaz M. Afnan Feroz" />
       </div>
     </div>
   </section>
@@ -410,54 +377,36 @@
   <!-- SKILLS -->
   <section id="skills">
     <div class="container">
-      <p class="section-label">Toolchain</p>
-      <h2 class="section-title">Technical Skills</h2>
-      <div class="skills-grid reveal">
-        <div class="skill-card">
-          <div class="skill-card-title">EDA &amp; IC Design</div>
-          <div class="skill-tags">
-            <span class="tag">Cadence Virtuoso</span>
-            <span class="tag">DRC / LVS</span>
-            <span class="tag">AV Parasitic Extraction</span>
-            <span class="tag">GDSII Output</span>
-            <span class="tag">Pre/Post-Layout Sim</span>
+      <div class="section-header">
+        <div class="section-tag">Toolchain</div>
+        <h2 class="section-title">Technical Skills</h2>
+      </div>
+      <div class="hex-grid reveal">
+        <div class="hex-card">
+          <div class="hex-title">EDA & IC Design</div>
+          <div class="tags">
+            <span class="tag">Cadence Virtuoso</span><span class="tag">DRC/LVS</span>
+            <span class="tag">AV Extraction</span><span class="tag">GDSII</span><span class="tag">Pre/Post Sim</span>
           </div>
         </div>
-        <div class="skill-card">
-          <div class="skill-card-title">HDL &amp; Digital Design</div>
-          <div class="skill-tags">
-            <span class="tag">Verilog HDL</span>
-            <span class="tag">RTL Design</span>
-            <span class="tag">Testbench Writing</span>
-            <span class="tag">Gate-Level Primitives</span>
-            <span class="tag">Xilinx Vivado</span>
-            <span class="tag">XSim</span>
+        <div class="hex-card">
+          <div class="hex-title">HDL & Digital Design</div>
+          <div class="tags">
+            <span class="tag">Verilog HDL</span><span class="tag">RTL Design</span>
+            <span class="tag">Testbenches</span><span class="tag">Xilinx Vivado</span><span class="tag">XSim</span>
           </div>
         </div>
-        <div class="skill-card">
-          <div class="skill-card-title">Programming</div>
-          <div class="skill-tags">
-            <span class="tag">C / C++</span>
-            <span class="tag">Python</span>
-            <span class="tag">MATLAB</span>
-          </div>
+        <div class="hex-card">
+          <div class="hex-title">Programming</div>
+          <div class="tags"><span class="tag">C/C++</span><span class="tag">Python</span><span class="tag">MATLAB</span></div>
         </div>
-        <div class="skill-card">
-          <div class="skill-card-title">RF &amp; EM Simulation</div>
-          <div class="skill-tags">
-            <span class="tag">CST Microwave Studio</span>
-            <span class="tag">S-Parameters</span>
-            <span class="tag">Return Loss / VSWR</span>
-            <span class="tag">Radiation Pattern</span>
-          </div>
+        <div class="hex-card">
+          <div class="hex-title">RF & EM Simulation</div>
+          <div class="tags"><span class="tag">CST Microwave</span><span class="tag">S-Parameters</span><span class="tag">VSWR</span><span class="tag">Radiation</span></div>
         </div>
-        <div class="skill-card">
-          <div class="skill-card-title">Design &amp; Documentation</div>
-          <div class="skill-tags">
-            <span class="tag">AutoCAD</span>
-            <span class="tag">LaTeX / Overleaf</span>
-            <span class="tag">Linux / UNIX</span>
-          </div>
+        <div class="hex-card">
+          <div class="hex-title">Design & Documentation</div>
+          <div class="tags"><span class="tag">AutoCAD</span><span class="tag">LaTeX</span><span class="tag">Linux/UNIX</span></div>
         </div>
       </div>
     </div>
@@ -466,105 +415,73 @@
   <!-- PROJECTS -->
   <section id="projects">
     <div class="container">
-      <p class="section-label">Work</p>
-      <h2 class="section-title">Projects</h2>
+      <div class="section-header">
+        <div class="section-tag">Work</div>
+        <h2 class="section-title">Projects</h2>
+      </div>
       <div class="projects-grid">
 
         <div class="project-card featured reveal">
-          <div class="project-type">Featured &nbsp;·&nbsp; CUET Academic Project &nbsp;·&nbsp; EEE-476</div>
-          <div class="project-title">4-bit Ripple Carry Adder — VLSI Physical Design &amp; Verification</div>
-          <ul class="project-highlights">
-            <li>Built a 6-cell CMOS library from transistor level: INV, NAND, AND, OR, XOR, Full Adder — each as complementary PMOS pull-up / NMOS pull-down networks</li>
-            <li>Executed the complete hierarchical VLSI flow per cell: schematic entry → functional simulation → symbol creation → custom layout → DRC/LVS sign-off → AV parasitic extraction → pre/post-layout transient simulation</li>
-            <li>Assembled 4-bit top-level chip layout with shared VDD/GND rails and labelled I/O pads (A[3:0], B[3:0], S[3:0], C_out); passed top-level DRC/LVS sign-off</li>
-            <li>Observed and documented ripple-delay propagation across carry chain in AV-extracted post-layout waveforms; delivered GDSII-ready chip layout</li>
+          <div class="project-chip">Featured · CUET Academic · EEE-476</div>
+          <div class="project-title">4-bit Ripple Carry Adder — VLSI Physical Design & Verification</div>
+          <ul class="project-desc">
+            <li>Built 6-cell CMOS library: INV, NAND, AND, OR, XOR, Full Adder from transistor level</li>
+            <li>Complete hierarchical flow: schematic → simulation → layout → DRC/LVS → AV extraction → post-layout sim</li>
+            <li>Top-level chip with shared VDD/GND, labelled I/O pads; passed top-level DRC/LVS</li>
+            <li>Observed ripple-delay in AV-extracted waveforms; delivered GDSII-ready layout</li>
           </ul>
           <div class="project-footer">
-            <div class="project-tools">
-              <span class="tool-badge">Cadence Virtuoso</span>
-              <span class="tool-badge">DRC / LVS</span>
-              <span class="tool-badge">GDSII</span>
-              <span class="tool-badge">AV Extraction</span>
-            </div>
-            <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
-              <a href="https://drive.google.com/file/d/1RjMX3N6i57A1URrCO4h0ucirIzeI9pCg/view?usp=drive_link" target="_blank" class="report-btn">
-                <i class="fa fa-file-pdf"></i> Report
-              </a>
+            <div class="tools"><span class="tool">Cadence Virtuoso</span><span class="tool">DRC/LVS</span><span class="tool">GDSII</span></div>
+            <div style="display:flex;align-items:center;gap:12px;">
+              <a href="https://drive.google.com/file/d/1RjMX3N6i57A1URrCO4h0ucirIzeI9pCg/view?usp=drive_link" target="_blank" class="report-btn"><i class="fa fa-file-pdf"></i> Report</a>
               <span class="project-date">Aug 2025</span>
             </div>
           </div>
         </div>
 
         <div class="project-card reveal">
-          <div class="project-type">Self-Initiated &nbsp;·&nbsp; Personal Project</div>
-          <div class="project-title">4-bit Ripple Carry Adder — RTL Design &amp; Verification</div>
-          <ul class="project-highlights">
-            <li>Gate-level Verilog <code>full_adder</code> using <code>assign</code> and <code>or()</code> primitive; four instances in <code>Four_bit_RCA</code> with internal carry wires w0–w2 and dedicated Cin port</li>
-            <li>Self-checking testbench: 7+8+0=15 and 15+9+1=25 — both cases passed XSim behavioural simulation with correct S[3:0] and Cout</li>
-            <li>Synthesis on Kintex-7 (xc7k70tfbv676-1): 4 Slice LUTs, 14 Bonded IOBs (&lt;0.01% utilisation)</li>
-            <li>Critical path B[0]→S[3]: 4.94 ns total (logic 3.41 ns + route 1.53 ns) — synthesizable above 200 MHz</li>
+          <div class="project-chip">Self-Initiated · Personal Project</div>
+          <div class="project-title">4-bit RCA — RTL Design & Verification</div>
+          <ul class="project-desc">
+            <li>Gate-level Verilog full_adder with assign & primitive or(); four instances cascaded</li>
+            <li>Self-checking testbench: 7+8+0=15, 15+9+1=25 passed XSim behavioural sim</li>
+            <li>Synthesis on Kintex-7: 4 LUTs, 14 IOBs (<0.01% utilisation)</li>
+            <li>Critical path B[0]→S[3]: 4.94 ns (logic 3.41 + route 1.53) >200 MHz capable</li>
           </ul>
           <div class="project-footer">
-            <div class="project-tools">
-              <span class="tool-badge">Verilog HDL</span>
-              <span class="tool-badge">Vivado 2025.2</span>
-              <span class="tool-badge">Kintex-7</span>
-            </div>
-            <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
-              <a href="https://drive.google.com/file/d/13Lr4ptwof_2dkWQhHX70Epxj0WOPA-l2/view?usp=drive_link" target="_blank" class="report-btn">
-                <i class="fa fa-file-pdf"></i> Report
-              </a>
-              <span class="project-date">Jun 2026</span>
-            </div>
+            <div class="tools"><span class="tool">Verilog</span><span class="tool">Vivado</span><span class="tool">Kintex-7</span></div>
+            <a href="https://drive.google.com/file/d/13Lr4ptwof_2dkWQhHX70Epxj0WOPA-l2/view?usp=drive_link" target="_blank" class="report-btn"><i class="fa fa-file-pdf"></i> Report</a>
           </div>
         </div>
 
         <div class="project-card reveal">
-          <div class="project-type">B.Sc. Thesis &nbsp;·&nbsp; CUET</div>
-          <div class="project-title">Triple-band Microstrip Patch Antenna — C-band, Wi-Fi 6E, X-band</div>
-          <ul class="project-highlights">
-            <li>Single-layer rectangular patch (50×40 mm²) on Rogers RO4003C (εr = 3.55) achieving resonances at 4.141 GHz, 6.148 GHz, and 8.407 GHz</li>
-            <li>Square DGS (15×15 mm) etched in ground plane simultaneously shifted existing resonances and generated the X-band mode via inductive loading — confirmed via surface current plots</li>
-            <li>Final: return loss −25.80/−14.63/−17.36 dB; VSWR 1.14/1.43/1.28; peak gain 5.88/5.70/3.65 dBi; efficiency 93.6%/78.4%/67.8%</li>
-            <li>Only reviewed design covering C-band + Wi-Fi 6E + X-band with simple rectangular DGS (no metamaterial)</li>
+          <div class="project-chip">B.Sc. Thesis · CUET</div>
+          <div class="project-title">Triple-band Microstrip Antenna (C, Wi-Fi 6E, X)</div>
+          <ul class="project-desc">
+            <li>50×40 mm² patch on Rogers RO4003C; resonances at 4.141, 6.148, 8.407 GHz</li>
+            <li>Square DGS (15×15 mm) generated X-band mode; confirmed via surface current plots</li>
+            <li>Return loss −25.8/−14.6/−17.4 dB; VSWR < 1.5; gain up to 5.88 dBi</li>
+            <li>Only reviewed design covering C + Wi-Fi 6E + X with simple rectangular DGS</li>
           </ul>
           <div class="project-footer">
-            <div class="project-tools">
-              <span class="tool-badge">CST Microwave Studio</span>
-              <span class="tool-badge">Rogers RO4003C</span>
-            </div>
-            <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
-              <a href="https://drive.google.com/file/d/1rasOnN49fU5FUCeY3U6UaXRKaD___tTa/view?usp=drive_link" target="_blank" class="report-btn">
-                <i class="fa fa-file-pdf"></i> Thesis
-              </a>
-              <span class="project-date">2025–2026</span>
-            </div>
+            <div class="tools"><span class="tool">CST Microwave</span><span class="tool">RO4003C</span></div>
+            <a href="https://drive.google.com/file/d/1rasOnN49fU5FUCeY3U6UaXRKaD___tTa/view?usp=drive_link" target="_blank" class="report-btn"><i class="fa fa-file-pdf"></i> Thesis</a>
           </div>
         </div>
 
         <div class="project-card reveal">
-          <div class="project-type">CUET Academic Project</div>
-          <div class="project-title">Electrical Services Design — Library &amp; Archival Vault</div>
-          <ul class="project-highlights">
-            <li>Complete LV infrastructure for 10-zone library/archive: ~18 kW connected load, split-bus distribution, ATS for generator integration, 3× online UPS</li>
-            <li>Archival environmental controls: UPS-backed dehumidifier, T/RH monitoring, PoE IP CCTV (IEEE 802.3af/at) with NVR</li>
-            <li>Delivered CAD layouts, SLDs, load schedules, BoQ; BNBC 2020 lightning risk assessment (Risk Index = 39); copper plate earthing &lt;1 Ω</li>
+          <div class="project-chip">CUET Academic Project</div>
+          <div class="project-title">Electrical Services Design — Library & Archival Vault</div>
+          <ul class="project-desc">
+            <li>LV infrastructure for 10-zone library; ~18 kW load, split-bus, ATS, 3× UPS</li>
+            <li>Archival controls: dehumidifier, T/RH monitoring, PoE CCTV (802.3af/at)</li>
+            <li>CAD layouts, SLDs, load schedules, BoQ; BNBC lightning risk assessment (Index 39)</li>
           </ul>
           <div class="project-footer">
-            <div class="project-tools">
-              <span class="tool-badge">AutoCAD</span>
-              <span class="tool-badge">BNBC 2020</span>
-              <span class="tool-badge">BS 7671</span>
-            </div>
-            <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
-              <a href="https://drive.google.com/file/d/1aYujlVV7PPF5xG15gh3w8Jjnwn8zA1LI/view?usp=drive_link" target="_blank" class="report-btn">
-                <i class="fa fa-file-pdf"></i> Report
-              </a>
-              <span class="project-date">2026</span>
-            </div>
+            <div class="tools"><span class="tool">AutoCAD</span><span class="tool">BNBC 2020</span><span class="tool">BS 7671</span></div>
+            <a href="https://drive.google.com/file/d/1aYujlVV7PPF5xG15gh3w8Jjnwn8zA1LI/view?usp=drive_link" target="_blank" class="report-btn"><i class="fa fa-file-pdf"></i> Report</a>
           </div>
         </div>
-
       </div>
     </div>
   </section>
@@ -572,32 +489,31 @@
   <!-- EXPERIENCE -->
   <section id="experience">
     <div class="container">
-      <p class="section-label">Industry</p>
-      <h2 class="section-title">Experience</h2>
+      <div class="section-header">
+        <div class="section-tag">Industry</div>
+        <h2 class="section-title">Experience</h2>
+      </div>
       <div class="exp-card reveal">
         <div class="exp-header">
           <div>
             <div class="exp-role">Industrial Attachment Trainee</div>
-            <div class="exp-company">Siemens Industry Limited &amp; Siemens Energy Bangladesh</div>
+            <div class="exp-company">Siemens Industry Ltd. & Siemens Energy Bangladesh</div>
           </div>
           <div class="exp-meta">
             <div class="exp-date">October 2025</div>
             <div class="exp-location">Dhaka, Bangladesh</div>
-            <a href="https://drive.google.com/file/d/1OZQJVEdOBQP5IpvleZpdouuaHYbdpst3/view?usp=drive_link" target="_blank" class="cert-btn">
-              <i class="fa fa-certificate"></i> View Certificate
-            </a>
+            <a href="https://drive.google.com/file/d/1OZQJVEdOBQP5IpvleZpdouuaHYbdpst3/view?usp=drive_link" target="_blank" class="cert-btn"><i class="fa fa-certificate"></i> View Certificate</a>
           </div>
         </div>
         <hr class="exp-divider" />
-        <ul class="exp-list">
-          <li>Bangladesh power sector structure: generation 10–20 kV, transmission 132/230/400 kV, distribution 0.415 kV; Siemens role in GIS, protection, and automation</li>
-          <li>AIS vs. GIS switchgear: 8DA10/8DB10 metal-enclosed units, ring-core CTs, SF₆ supervision (70–180 kPa)</li>
-          <li>LV equipment: ACBs with LSIG protection (150 kA), MCCBs, RCCBs, motor starters — DOL, star-delta, soft-starter, VFD (SINAMICS)</li>
-          <li>Transformer technology: oil-immersed vs. dry-type (cast resin), 8 FAT tests, Buchholz/differential protection, SENSFORMER IoT monitoring</li>
-          <li>Protection relays: ANSI codes 25, 50/51, 67/67N, 87T, 87B, REF; Siemens SIPROTEC-4/-5; DFDR fault location</li>
-          <li>Automation: PLC/SCADA/HMI via TIA Portal; IEC 61850, MODBUS TCP/IP, IEC 60870-5-104 protocols</li>
-          <li>Design tools: PSS SINCAL (power system analysis), SIMARIS (installation design)</li>
-          <li>EHS: Siemens 6 Golden Rules, permit-to-work, LOTO, step/touch potential, 30 mA RCDs</li>
+        <ul class="exp-grid">
+          <li>Power sector structure: gen 10–20 kV, trans 132/230/400 kV, dist 0.415 kV</li>
+          <li>AIS vs GIS: 8DA10/8DB10, ring-core CTs, SF₆ supervision</li>
+          <li>LV gear: ACBs (LSIG, 150 kA), MCCB, RCCB, motor starters (DOL, star-delta, VFD)</li>
+          <li>Transformers: oil/dry-type, FAT tests, Buchholz/differential, SENSFORMER IoT</li>
+          <li>Protection: ANSI 25, 50/51, 67/67N, 87T, 87B, REF; SIPROTEC-4/5</li>
+          <li>Automation: PLC/SCADA/HMI TIA Portal; IEC 61850, MODBUS, IEC 60870</li>
+          <li>Tools: PSS SINCAL, SIMARIS; EHS: 6 Golden Rules, LOTO, 30 mA RCDs</li>
         </ul>
       </div>
     </div>
@@ -606,31 +522,26 @@
   <!-- LEADERSHIP -->
   <section id="leadership">
     <div class="container">
-      <p class="section-label">Extracurricular</p>
-      <h2 class="section-title">Leadership</h2>
-      <div class="leadership-grid">
-        <div class="lead-card reveal">
+      <div class="section-header">
+        <div class="section-tag">Extracurricular</div>
+        <h2 class="section-title">Leadership</h2>
+      </div>
+      <div class="leadership-grid reveal">
+        <div class="lead-card">
           <div class="lead-title">Vice Chair</div>
-          <div class="lead-org">IEEE Power &amp; Energy Society (PES) · CUET Student Branch</div>
-          <p class="lead-desc">Led chapter activities and organized technical seminars and workshops connecting members with power sector professionals. Coordinated with faculty advisors and represented the branch at IEEE forums and institutional events.</p>
+          <div class="lead-org">IEEE PES · CUET Student Branch</div>
+          <p class="lead-desc">Led technical seminars and workshops connecting students with power sector professionals. Coordinated with faculty and represented branch at IEEE events.</p>
         </div>
-        <div class="lead-card reveal">
-          <div class="lead-title">Participant · 2 Consecutive Editions</div>
-          <div class="lead-org">FTC Case Competition · IEEE CUET Student Branch</div>
-          <p class="lead-desc">Addressed real challenges for PHP Float Glass Industries Ltd.: water scarcity, high furnace energy consumption, and low market awareness. Proposed rainwater harvesting, energy-efficient furnace replacement, and decorative glass campaigns.</p>
+        <div class="lead-card">
+          <div class="lead-title">Participant · 2 Editions</div>
+          <div class="lead-org">FTC Case Competition · IEEE CUET</div>
+          <p class="lead-desc">Solved PHP Float Glass challenges: water scarcity, furnace energy, market awareness. Proposed rainwater harvesting, efficient furnaces, decorative glass campaigns.</p>
         </div>
-        
-        <!-- VLSI Workshop Card -->
-        <div class="lead-card reveal">
-          <div class="lead-title">Participant — 2-Day Workshop</div>
-          <div class="lead-org">Bridging Academia and Industry: Mastering VLSI and Semiconductor Techniques · IEEE CUET WIE Affinity Group</div>
-          <p class="lead-desc">
-            Learned from Siliconova industry experts: MD Wahid Sadiq (Sr. Physical Design Engineer) on physical design, STA, timing closure, and TCL/Bash/Python scripting; Mohtasim Tasnim Zaman (Physical Design Engineer) on VLSI, embedded systems, Genus, Design Compiler, and Tcl-Tk scripting.
-          </p>
-          <a href="https://drive.google.com/file/d/11jyxYF38cdJBe42qqb8rNPikGBYjcQVk/view?usp=drive_link" target="_blank" class="cert-btn" style="margin-top:10px; display:inline-flex;">
-            <i class="fa fa-certificate"></i> View Certificate
-          </a>
-          <div style="font-family: var(--font-mono); font-size: 11px; color: var(--text-dimmer); margin-top: 10px;">January 2025 · CUET, Chattogram</div>
+        <div class="lead-card">
+          <div class="lead-title">2-Day VLSI Workshop</div>
+          <div class="lead-org">IEEE CUET WIE Affinity Group</div>
+          <p class="lead-desc">Learned from Siliconova experts: MD Wahid Sadiq on physical design, STA, TCL/Bash/Python; Mohtasim Tasnim Zaman on VLSI, Genus, Design Compiler.</p>
+          <a href="https://drive.google.com/file/d/11jyxYF38cdJBe42qqb8rNPikGBYjcQVk/view?usp=drive_link" target="_blank" class="cert-btn" style="margin-top:12px;"><i class="fa fa-certificate"></i> View Certificate</a>
         </div>
       </div>
     </div>
@@ -639,38 +550,25 @@
   <!-- EDUCATION -->
   <section id="education">
     <div class="container">
-      <p class="section-label">Academic Background</p>
-      <h2 class="section-title">Education</h2>
-      <div class="edu-grid">
-        <div class="edu-card reveal">
+      <div class="section-header">
+        <div class="section-tag">Academic</div>
+        <h2 class="section-title">Education</h2>
+      </div>
+      <div class="edu-list reveal">
+        <div class="edu-item">
           <div>
-            <div class="edu-degree">B.Sc. in Electrical &amp; Electronic Engineering</div>
-            <div class="edu-inst">Chittagong University of Engineering and Technology (CUET)</div>
+            <div class="edu-degree">B.Sc. in Electrical & Electronic Engineering</div>
+            <div class="edu-school">Chittagong University of Engineering and Technology (CUET)</div>
           </div>
-          <div class="edu-right">
-            <div class="edu-gpa">3.72 / 4.00</div>
-            <div class="edu-year">May 2026</div>
-          </div>
+          <div class="edu-right"><div class="edu-gpa">3.72/4.00</div><div class="edu-year">May 2026</div></div>
         </div>
-        <div class="edu-card reveal">
-          <div>
-            <div class="edu-degree">Higher Secondary Certificate (HSC) · Science</div>
-            <div class="edu-inst">Chittagong College</div>
-          </div>
-          <div class="edu-right">
-            <div class="edu-gpa">5.00 / 5.00</div>
-            <div class="edu-year">2020</div>
-          </div>
+        <div class="edu-item">
+          <div><div class="edu-degree">HSC · Science</div><div class="edu-school">Chittagong College</div></div>
+          <div class="edu-right"><div class="edu-gpa">5.00/5.00</div><div class="edu-year">2020</div></div>
         </div>
-        <div class="edu-card reveal">
-          <div>
-            <div class="edu-degree">Secondary School Certificate (SSC) · Science</div>
-            <div class="edu-inst">Chittagong Collegiate School</div>
-          </div>
-          <div class="edu-right">
-            <div class="edu-gpa">5.00 / 5.00</div>
-            <div class="edu-year">2018</div>
-          </div>
+        <div class="edu-item">
+          <div><div class="edu-degree">SSC · Science</div><div class="edu-school">Chittagong Collegiate School</div></div>
+          <div class="edu-right"><div class="edu-gpa">5.00/5.00</div><div class="edu-year">2018</div></div>
         </div>
       </div>
     </div>
@@ -679,85 +577,124 @@
   <!-- CONTACT -->
   <section id="contact">
     <div class="container">
-      <p class="section-label">Reach Out</p>
-      <h2 class="section-title">Contact</h2>
+      <div class="section-header">
+        <div class="section-tag">Reach Out</div>
+        <h2 class="section-title">Contact</h2>
+      </div>
       <div class="contact-grid reveal">
-        <a href="mailto:efazm.afnanferoz@gmail.com" class="contact-link">
+        <a href="mailto:efazm.afnanferoz@gmail.com" class="contact-item">
           <div class="contact-icon"><i class="fa fa-envelope"></i></div>
-          <div>
-            <div class="contact-label">Email</div>
-            <div class="contact-value">efazm.afnanferoz@gmail.com</div>
-          </div>
+          <div><div class="contact-label">Email</div><div class="contact-value">efazm.afnanferoz@gmail.com</div></div>
         </a>
-        <a href="tel:+8801795338703" class="contact-link">
+        <a href="tel:+8801795338703" class="contact-item">
           <div class="contact-icon"><i class="fa fa-phone"></i></div>
-          <div>
-            <div class="contact-label">Phone</div>
-            <div class="contact-value">+880 1795-338703</div>
-          </div>
+          <div><div class="contact-label">Phone</div><div class="contact-value">+880 1795-338703</div></div>
         </a>
-        <a href="https://bd.linkedin.com/in/efaz-m-afnan-feroz-ctg-bd" target="_blank" class="contact-link">
+        <a href="https://bd.linkedin.com/in/efaz-m-afnan-feroz-ctg-bd" target="_blank" class="contact-item">
           <div class="contact-icon"><i class="fab fa-linkedin"></i></div>
-          <div>
-            <div class="contact-label">LinkedIn</div>
-            <div class="contact-value">efaz-m-afnan-feroz-ctg-bd</div>
-          </div>
+          <div><div class="contact-label">LinkedIn</div><div class="contact-value">efaz-m-afnan-feroz-ctg-bd</div></div>
         </a>
-        <a href="https://github.com/efaz-m-afnan-feroz-git" target="_blank" class="contact-link">
+        <a href="https://github.com/efaz-m-afnan-feroz-git" target="_blank" class="contact-item">
           <div class="contact-icon"><i class="fab fa-github"></i></div>
-          <div>
-            <div class="contact-label">GitHub</div>
-            <div class="contact-value">efaz-m-afnan-feroz-git</div>
-          </div>
+          <div><div class="contact-label">GitHub</div><div class="contact-value">efaz-m-afnan-feroz-git</div></div>
         </a>
       </div>
     </div>
   </section>
 
-  <!-- FOOTER -->
   <footer>
-    <p class="footer-text">
-      Efaz M. Afnan Feroz &nbsp;·&nbsp; Chattogram, Bangladesh &nbsp;·&nbsp; Built with HTML &amp; CSS &nbsp;·&nbsp; Hosted on GitHub Pages
-    </p>
+    <p>Efaz M. Afnan Feroz · Chattogram, Bangladesh · Built with purpose</p>
   </footer>
 
   <script>
-    const navbar = document.getElementById('navbar');
-    window.addEventListener('scroll', () => {
-      navbar.classList.toggle('scrolled', window.scrollY > 20);
-    });
+    // Particle network background
+    const canvas = document.getElementById('particle-canvas');
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+    const maxParticles = 45;
+    const connectionDist = 120;
 
-    function toggleMenu() {
-      const links = document.getElementById('navLinks');
-      const isOpen = links.style.display === 'flex';
-      links.style.display = isOpen ? 'none' : 'flex';
-      if (!isOpen) {
-        links.style.flexDirection = 'column';
-        links.style.position = 'absolute';
-        links.style.top = '58px';
-        links.style.left = '0';
-        links.style.right = '0';
-        links.style.background = 'rgba(243,249,245,0.97)';
-        links.style.padding = '16px 28px 20px';
-        links.style.borderBottom = '1px solid #C4DCCB';
-        links.style.gap = '14px';
-        links.style.boxShadow = '0 4px 12px rgba(0,0,0,0.08)';
+    function resize() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resize);
+    resize();
+
+    class Particle {
+      constructor() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.vx = (Math.random() - 0.5) * 0.5;
+        this.vy = (Math.random() - 0.5) * 0.5;
+        this.radius = 1.2 + Math.random() * 1.2;
+      }
+      move() {
+        this.x += this.vx;
+        this.y += this.vy;
+        if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
+        if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
+      }
+      draw() {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(0,230,118,0.6)';
+        ctx.fill();
       }
     }
 
+    for (let i = 0; i < maxParticles; i++) particles.push(new Particle());
+
+    function connect() {
+      for (let i = 0; i < particles.length; i++) {
+        for (let j = i + 1; j < particles.length; j++) {
+          const dx = particles[i].x - particles[j].x;
+          const dy = particles[i].y - particles[j].y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < connectionDist) {
+            ctx.beginPath();
+            ctx.moveTo(particles[i].x, particles[i].y);
+            ctx.lineTo(particles[j].x, particles[j].y);
+            ctx.strokeStyle = `rgba(0,230,118,${0.12 * (1 - dist / connectionDist)})`;
+            ctx.lineWidth = 0.8;
+            ctx.stroke();
+          }
+        }
+      }
+    }
+
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      particles.forEach(p => { p.move(); p.draw(); });
+      connect();
+      requestAnimationFrame(animate);
+    }
+    animate();
+
+    // Mobile menu toggle
+    function toggleMenu() {
+      document.getElementById('navLinks').classList.toggle('active');
+    }
+    document.getElementById('menuToggle').addEventListener('click', toggleMenu);
     document.querySelectorAll('.nav-links a').forEach(link => {
       link.addEventListener('click', () => {
-        const links = document.getElementById('navLinks');
-        if (window.innerWidth <= 768) links.style.display = 'none';
+        document.getElementById('navLinks').classList.remove('active');
       });
     });
 
-    const reveals = document.querySelectorAll('.reveal');
+    // Scroll reveal (simple)
+    const revealElements = document.querySelectorAll('.reveal');
     const observer = new IntersectionObserver((entries) => {
-      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-    }, { threshold: 0.07 });
-    reveals.forEach(el => observer.observe(el));
+      entries.forEach(e => {
+        if (e.isIntersecting) e.target.style.opacity = 1, e.target.style.transform = 'translateY(0)';
+      });
+    }, { threshold: 0.1 });
+    revealElements.forEach(el => {
+      el.style.opacity = 0;
+      el.style.transform = 'translateY(30px)';
+      el.style.transition = 'opacity 0.7s ease, transform 0.7s ease';
+      observer.observe(el);
+    });
   </script>
-
 </body>
 </html>
