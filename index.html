@@ -4,6 +4,12 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Efaz M. Afnan Feroz — Aspiring VLSI &amp; IC Design Engineer</title>
+    <script>
+        (function () {
+            var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+            document.documentElement.setAttribute('data-theme', prefersDark ? 'dark' : 'light');
+        })();
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
@@ -28,6 +34,28 @@
             --t: 0.2s ease;
             --shadow: 0 1px 4px rgba(0, 0, 0, 0.07);
             --shadow-hover: 0 4px 16px rgba(11, 122, 64, 0.13);
+            --nav-bg: rgba(243, 249, 245, 0.88);
+            --shadow-soft: 0 2px 8px rgba(11, 122, 64, 0.25);
+            --shadow-photo: 0 8px 24px rgba(11, 122, 64, 0.18);
+        }
+
+        [data-theme="dark"] {
+            --bg: #0A140F;
+            --surface: #101D15;
+            --surface-2: #16261C;
+            --border: #24392C;
+            --accent: #34D399;
+            --accent-glow: rgba(52, 211, 153, 0.10);
+            --accent-mid: rgba(52, 211, 153, 0.22);
+            --warm: #E0B341;
+            --text: #EAF3EC;
+            --text-dim: #9FC0AC;
+            --text-dimmer: #5C7A68;
+            --shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+            --shadow-hover: 0 4px 18px rgba(52, 211, 153, 0.18);
+            --nav-bg: rgba(10, 20, 15, 0.85);
+            --shadow-soft: 0 2px 10px rgba(52, 211, 153, 0.28);
+            --shadow-photo: 0 8px 26px rgba(52, 211, 153, 0.22);
         }
 
         *,
@@ -49,6 +77,7 @@
             font-size: 15px;
             line-height: 1.65;
             -webkit-font-smoothing: antialiased;
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
 
         a {
@@ -83,10 +112,10 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            background: rgba(243, 249, 245, 0.88);
+            background: var(--nav-bg);
             backdrop-filter: blur(14px);
             border-bottom: 1px solid transparent;
-            transition: border-color 0.3s ease;
+            transition: border-color 0.3s ease, background-color 0.3s ease;
         }
 
         nav.scrolled {
@@ -134,6 +163,34 @@
         .nav-cta:hover {
             background: var(--accent-glow);
             opacity: 1 !important;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 22px;
+        }
+
+        .theme-toggle {
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            border: 1px solid var(--border);
+            background: var(--surface);
+            color: var(--accent);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 13px;
+            flex-shrink: 0;
+            transition: border-color var(--t), background var(--t), transform var(--t);
+        }
+
+        .theme-toggle:hover {
+            border-color: var(--accent);
+            background: var(--surface-2);
+            transform: rotate(14deg);
         }
 
         .nav-hamburger {
@@ -203,7 +260,7 @@
             object-fit: cover;
             border-radius: 50%;
             border: 3px solid var(--accent);
-            box-shadow: 0 8px 24px rgba(11, 122, 64, 0.18);
+            box-shadow: var(--shadow-photo);
             display: block;
             background: var(--surface-2);
         }
@@ -314,7 +371,7 @@
             align-items: center;
             gap: 8px;
             transition: opacity var(--t);
-            box-shadow: 0 2px 8px rgba(11, 122, 64, 0.25);
+            box-shadow: var(--shadow-soft);
         }
 
         .btn-primary:hover {
@@ -846,6 +903,21 @@
                 display: none;
             }
 
+            .nav-links.mobile-open {
+                display: flex;
+                flex-direction: column;
+                position: absolute;
+                top: 58px;
+                left: 0;
+                right: 0;
+                background: var(--nav-bg);
+                backdrop-filter: blur(14px);
+                padding: 16px 28px 20px;
+                border-bottom: 1px solid var(--border);
+                gap: 14px;
+                box-shadow: var(--shadow-hover);
+            }
+
             .nav-hamburger {
                 display: flex;
             }
@@ -925,15 +997,20 @@
     <!-- NAV -->
     <nav id="navbar">
         <span class="nav-logo">efaz.dev</span>
-        <ul class="nav-links" id="navLinks">
-            <li><a href="#skills">Skills</a></li>
-            <li><a href="#projects">Projects</a></li>
-            <li><a href="#experience">Experience</a></li>
-            <li><a href="#education">Education</a></li>
-            <li><a href="#contact" class="nav-cta">Contact</a></li>
-        </ul>
-        <div class="nav-hamburger" id="hamburger" onclick="toggleMenu()">
-            <span></span><span></span><span></span>
+        <div class="nav-right">
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#education">Education</a></li>
+                <li><a href="#contact" class="nav-cta">Contact</a></li>
+            </ul>
+            <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode" title="Toggle dark mode">
+                <i class="fa fa-moon"></i>
+            </button>
+            <div class="nav-hamburger" id="hamburger" onclick="toggleMenu()">
+                <span></span><span></span><span></span>
+            </div>
         </div>
     </nav>
 
@@ -956,16 +1033,16 @@
                             <span class="stat-label">CGPA / 4.00</span>
                         </div>
                         <div class="stat-item">
-                            <span class="stat-value">6</span>
-                            <span class="stat-label">CMOS Cells</span>
+                            <span class="stat-value">GDSII</span>
+                            <span class="stat-label">IC Sign-off Achieved</span>
                         </div>
                         <div class="stat-item">
-                            <span class="stat-value">4.94 ns</span>
-                            <span class="stat-label">Critical Path</span>
+                            <span class="stat-value">78 kWp</span>
+                            <span class="stat-label">PV System Designed</span>
                         </div>
                         <div class="stat-item">
-                            <span class="stat-value">3</span>
-                            <span class="stat-label">Antenna Bands</span>
+                            <span class="stat-value">Siemens</span>
+                            <span class="stat-label">Industrial Attachment</span>
                         </div>
                     </div>
                     <div class="hero-actions">
@@ -1346,28 +1423,29 @@
             navbar.classList.toggle('scrolled', window.scrollY > 20);
         });
 
+        // ── Dark mode toggle ──
+        const themeToggle = document.getElementById('themeToggle');
+        function renderTheme() {
+            const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+            themeToggle.innerHTML = isDark ? '<i class="fa fa-sun"></i>' : '<i class="fa fa-moon"></i>';
+            themeToggle.setAttribute('aria-label', isDark ? 'Switch to light mode' : 'Switch to dark mode');
+        }
+        renderTheme();
+        themeToggle.addEventListener('click', () => {
+            const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+            document.documentElement.setAttribute('data-theme', isDark ? 'light' : 'dark');
+            renderTheme();
+        });
+
         function toggleMenu() {
-            const links = document.getElementById('navLinks');
-            const isOpen = links.style.display === 'flex';
-            links.style.display = isOpen ? 'none' : 'flex';
-            if (!isOpen) {
-                links.style.flexDirection = 'column';
-                links.style.position = 'absolute';
-                links.style.top = '58px';
-                links.style.left = '0';
-                links.style.right = '0';
-                links.style.background = 'rgba(243,249,245,0.97)';
-                links.style.padding = '16px 28px 20px';
-                links.style.borderBottom = '1px solid #C4DCCB';
-                links.style.gap = '14px';
-                links.style.boxShadow = '0 4px 12px rgba(0,0,0,0.08)';
-            }
+            document.getElementById('navLinks').classList.toggle('mobile-open');
         }
 
         document.querySelectorAll('.nav-links a').forEach(link => {
             link.addEventListener('click', () => {
-                const links = document.getElementById('navLinks');
-                if (window.innerWidth <= 768) links.style.display = 'none';
+                if (window.innerWidth <= 768) {
+                    document.getElementById('navLinks').classList.remove('mobile-open');
+                }
             });
         });
 
