@@ -1030,7 +1030,7 @@
                         <span>VLSI Layout Design</span>&nbsp; · &nbsp;RTL Design&nbsp; · &nbsp;IC Verification
                     </p>
                     <p class="hero-bio">
-                        Fresh EEE graduate with hands-on experience from transistor-level CMOS layout through DRC/LVS sign-off and GDSII output, plus Verilog RTL synthesis on real FPGA silicon. Based in Chattogram, targeting semiconductor roles in Bangladesh and Malaysia.
+                        Fresh EEE graduate with hands-on experience from transistor-level CMOS layout through DRC/LVS sign-off and GDSII output, plus Verilog RTL synthesis on real FPGA silicon. Completed a 5-day SystemVerilog design verification training with ULKASEMI. Based in Chattogram, targeting semiconductor roles in Bangladesh and Malaysia.
                     </p>
                     <div class="hero-stats">
                         <div class="stat-item">
@@ -1097,6 +1097,17 @@
                         <span class="tag">Gate-Level Primitives</span>
                         <span class="tag">Xilinx Vivado</span>
                         <span class="tag">XSim</span>
+                    </div>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-card-title">Verification</div>
+                    <div class="skill-tags">
+                        <span class="tag">SystemVerilog</span>
+                        <span class="tag">Class-Based TB</span>
+                        <span class="tag">Generator / Driver / Monitor</span>
+                        <span class="tag">Scoreboard</span>
+                        <span class="tag">Mailboxes &amp; Semaphores</span>
+                        <span class="tag">ModelSim</span>
                     </div>
                 </div>
                 <div class="skill-card">
@@ -1288,6 +1299,8 @@
         <div class="container">
             <p class="section-label">Industry</p>
             <h2 class="section-title">Experience</h2>
+
+            <!-- Siemens Experience Card -->
             <div class="exp-card reveal">
                 <div class="exp-header">
                     <div>
@@ -1314,6 +1327,33 @@
                     <li>EHS: Siemens 6 Golden Rules, permit-to-work, LOTO, step/touch potential, 30 mA RCDs</li>
                 </ul>
             </div>
+
+            <!-- ULKASEMI Training Experience Card -->
+            <div class="exp-card reveal" style="margin-top: 18px;">
+                <div class="exp-header">
+                    <div>
+                        <div class="exp-role">Technical Training Program — Trainee Engineer, Design Verification</div>
+                        <div class="exp-company">ULKASEMI &nbsp;·&nbsp; SystemVerilog &amp; Class-Based Testbench Architecture</div>
+                    </div>
+                    <div class="exp-meta">
+                        <div class="exp-date">10–15 August 2026</div>
+                        <div class="exp-location">UVTI, Dhaka, Bangladesh</div>
+                        <a href="https://drive.google.com/file/d/1313of3z71Lr7q2AkEq843XfWOhqDxAXd/view?usp=sharing" target="_blank" class="cert-btn">
+                            <i class="fa fa-certificate"></i> View Training Report
+                        </a>
+                    </div>
+                </div>
+                <hr class="exp-divider" />
+                <ul class="exp-list">
+                    <li>Attended a 5-day, full-day technical training covering SystemVerilog fundamentals and class-based (UVM-style) verification methodology, following the ModelSim <code>vlib</code>/<code>vlog</code>/<code>vsim</code> compile-and-simulate flow</li>
+                    <li>Built a complete class-based testbench for a 4-bit up/down binary counter with parallel load, active-low reset, and carry-out: virtual interface, transaction class, and a generator → driver → monitor → scoreboard component chain connected via mailboxes and semaphores</li>
+                    <li>Implemented a self-checking scoreboard that computed expected count/carry values against a reference model and reported pass/fail per transaction; wrote directed test sequences for load, up-count, down-count, and hold operations</li>
+                    <li>Extended the same architecture to a 256-byte memory device DUT featuring a protected address range (200–215) and a multi-cycle activate/valid handshake protocol; designed a monitor that reconstructed the write/read state sequence (S1–S4) from interface activity</li>
+                    <li>Built a reference-model scoreboard tracking a shadow 256-byte memory array to independently verify write data, read data, and error-flag generation for protected-region and out-of-range (addr &gt; 231) address access</li>
+                    <li>Practiced core SystemVerilog fundamentals throughout: packed/unpacked/dynamic arrays, OOP (encapsulation, inheritance, polymorphism), and <code>fork/join</code>, <code>fork/join_any</code>, <code>fork/join_none</code> process-control semantics</li>
+                </ul>
+            </div>
+
         </div>
     </section>
 
@@ -1332,6 +1372,11 @@
                     <div class="lead-title">Participant · 2 Consecutive Editions</div>
                     <div class="lead-org">FTC Case Competition · IEEE CUET Student Branch</div>
                     <p class="lead-desc">Addressed real challenges for PHP Float Glass Industries Ltd.: water scarcity, high furnace energy consumption, and low market awareness. Proposed rainwater harvesting, energy-efficient furnace replacement, and decorative glass campaigns.</p>
+                </div>
+                <div class="lead-card reveal">
+                    <div class="lead-title">Participant — 2-Day Workshop on Mastering VLSI &amp; Semiconductor Techniques</div>
+                    <div class="lead-org">IEEE CUET WIE Affinity Group Student Branch · Jan 2025</div>
+                    <p class="lead-desc">Learned from Siliconova industry experts: physical design, STA, timing closure, and scripting with TCL/Bash/Python (MD Wahid Sadiq); VLSI, embedded systems, Genus, Design Compiler, and Tcl-Tk scripting (Mohtasim Tasnim Zaman).</p>
                 </div>
             </div>
         </div>
